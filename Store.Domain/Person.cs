@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace Store.Domain
 {
-    public class Category: BaseDomainEntity
+    public class Person: BaseDomainEntity
     {
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public byte Gender { get; set; }
     }
 }
