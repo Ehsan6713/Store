@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
+using Store.Application.Exceptions;
 using Store.Application.Features.Brands.Requests.Commands;
 using Store.Application.Persistence.Contracts;
+using Store.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +25,10 @@ namespace Store.Application.Features.Brands.Handlers.Commands
         public async Task Handle(DeleteBrandCommandRequest request, CancellationToken cancellationToken)
         {
             var brand =await brandRepository.Get(request.Id);
+            if (brand == null)
+            {
+                throw new NotFoundException(nameof(Domain.Brand), request.Id);
+            }
             await brandRepository.Delete(brand);
 
 

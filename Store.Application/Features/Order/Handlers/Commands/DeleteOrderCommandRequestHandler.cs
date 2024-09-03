@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
+using Store.Application.Exceptions;
 using Store.Application.Features.Order.Requests.Commands;
 using Store.Application.Persistence.Contracts;
+using Store.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +25,10 @@ namespace Store.Application.Features.Order.Handlers.Commands
         public async Task Handle(DeleteOrderCommandRequest request, CancellationToken cancellationToken)
         {
             var order = await orderRepository.Get(request.Id);
+            if (order == null)
+            {
+                throw new NotFoundException(nameof(Domain.Order), request.Id);
+            }
             await orderRepository.Delete(order);
         }
     }

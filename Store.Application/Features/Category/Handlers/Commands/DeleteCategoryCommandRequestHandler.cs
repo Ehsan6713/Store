@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
+using Store.Application.Exceptions;
 using Store.Application.Features.Category.Requests.Commands;
 using Store.Application.Persistence.Contracts;
+using Store.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +25,10 @@ namespace Store.Application.Features.Category.Handlers.Commands
         public async Task Handle(DeleteCategoryCommandRequest request, CancellationToken cancellationToken)
         {
             var category = await categoryRepository.Get(request.Id);
+            if (category == null)
+            {
+                throw new NotFoundException(nameof(Domain.Category), request.Id);
+            }
             await categoryRepository.Delete(category);
         }
     }

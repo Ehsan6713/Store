@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Store.Application.Exceptions;
 using Store.Application.Features.Products.Requests.Commands;
 using Store.Application.Persistence.Contracts;
 using System;
@@ -23,6 +24,10 @@ namespace Store.Application.Features.Products.Handlers.Commands
         public async Task Handle(DeleteProductCommandRequest request, CancellationToken cancellationToken)
         {
             var product = await productRepository.Get(request.Id);
+            if (product == null)
+            {
+                throw new NotFoundException(nameof(Domain.Product), request.Id);
+            }
             await productRepository.Delete(product);
         }
     }
