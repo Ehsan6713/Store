@@ -1,25 +1,20 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Store.Application.DTOS.Person.Validations
 {
-    public class CreatePersonDtoValidation:AbstractValidator<CreatePersonDto>
+    public class IPersonDtoValidator : AbstractValidator<IPersonDto>
     {
-        public CreatePersonDtoValidation()
+        public IPersonDtoValidator()
         {
-            RuleFor(x=>x.FirstName)
+            RuleFor(x => x.FirstName)
                 .NotEmpty().WithMessage("{PropertyName} is required")
                 .MaximumLength(100).WithMessage("max length for {PropertyName} is 100");
 
-            RuleFor(x=>x.LastName)
+            RuleFor(x => x.LastName)
                 .NotEmpty().WithMessage("{PropertyName} is required")
                 .MaximumLength(100).WithMessage("max length for {PropertyName} is 100");
 
-            RuleFor(x=>x.Gender).NotEmpty().WithMessage("{PropertyName} is required");
+            RuleFor(x => x.Gender).NotEmpty().WithMessage("{PropertyName} is required");
 
         }
     }

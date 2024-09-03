@@ -7,13 +7,11 @@ using System.Threading.Tasks;
 
 namespace Store.Application.DTOS.Brand.Validations
 {
-    public class CreateBrandDtoValidator:AbstractValidator<CreateBrandDto>
+    public class CreateBrandDtoValidator : AbstractValidator<CreateBrandDto>
     {
         public CreateBrandDtoValidator()
         {
-            RuleFor(x => x.Name)
-                .NotEmpty().WithMessage("{PropertyName} is required")
-                .MaximumLength(200).WithMessage("max length for {PropertyName} is 200");
+            Include(new IBrandDtoValidator());
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using Store.Application.DTOS.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Store.Application.DTOS.Attachment
 {
-    public class UpdateAttachmentDto: BaseDto, IAttachmentDto
+    public interface IAttachmentDto
     {
         public string Title { get; set; }
         public byte[] Content { get; set; }

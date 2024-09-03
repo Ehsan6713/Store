@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Store.Application.DTOS.Person
 {
-    public class CreatePersonDto
+    public class CreatePersonDto: IPersonDto
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

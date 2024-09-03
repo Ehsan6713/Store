@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Store.Application.Persistence.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,9 @@ namespace Store.Application.DTOS.OrderDetail.Validations
 {
     public class UpdateOrderDetailDtoValidator : AbstractValidator<UpdateOrderDetailDto>
     {
-        public UpdateOrderDetailDtoValidator()
+        public UpdateOrderDetailDtoValidator(IProductRepository productRepository)
         {
-            RuleFor(x => x.ProductId).NotEmpty().WithMessage("{PropertyName} is required");
-            RuleFor(x => x.UnitPrice).GreaterThan(0).WithMessage("{PropertyName} can no be Less than 1");
-            RuleFor(x => x.Quantity).GreaterThan(0).WithMessage("{PropertyName} can no be Less than 1");
-            RuleFor(x => x.Discount).GreaterThan(-1).WithMessage("{PropertyName} can no be Negative");
+            Include(new IOrderDetailDtoValidator(productRepository));
         }
     }
 }

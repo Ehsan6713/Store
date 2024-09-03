@@ -25,7 +25,7 @@ namespace Store.Application.Features.Person.Handlers.Commands
         public async Task<int> Handle(CreatePersonCommandRequest request, CancellationToken cancellationToken)
         {
             #region Validation
-            var validator = new CreatePersonDtoValidation();
+            var validator = new CreatePersonDtoValidator();
             var validationResult = validator.Validate(request.CreatePersonDto);
             if (validationResult.IsValid == false)
                 throw new Exception("Not Valid Object");

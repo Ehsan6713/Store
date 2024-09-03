@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Store.Application.DTOS.Category
 {
-    public class CategoryDto 
+    public class CategoryDto : BaseDto,ICategoryDto
     {
         public string Name { get; set; }
     }

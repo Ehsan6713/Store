@@ -15,16 +15,18 @@ namespace Store.Application.Features.OrderDetail.Handlers.Commands
     {
         private readonly IOrderDetailRepository orderDetailRepository;
         private readonly IMapper mapper;
+        private readonly IProductRepository productRepository;
 
-        public UpdateOrderDetailCommandRequestHandler(IOrderDetailRepository orderDetailRepository,IMapper mapper)
+        public UpdateOrderDetailCommandRequestHandler(IOrderDetailRepository orderDetailRepository,IMapper mapper,IProductRepository productRepository)
         {
             this.orderDetailRepository = orderDetailRepository;
             this.mapper = mapper;
+            this.productRepository = productRepository;
         }
         public async Task<Unit> Handle(UpdateOrderDetailCommandRequest request, CancellationToken cancellationToken)
         {
             #region Validation
-            var validator = new UpdateOrderDetailDtoValidator();
+            var validator = new UpdateOrderDetailDtoValidator(productRepository);
             var validationResult = validator.Validate(request.UpdateOrderDetailDto);
             if (validationResult.IsValid == false)
                 throw new Exception("Not Valid Object");

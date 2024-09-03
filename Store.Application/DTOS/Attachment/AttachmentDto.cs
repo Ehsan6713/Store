@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Store.Application.DTOS.Attachment
 {
-    public class AttachmentDto:BaseDto
+    public class AttachmentDto : BaseDto, IAttachmentDto
     {
         public string Title { get; set; }
         public byte[] Content { get; set; }

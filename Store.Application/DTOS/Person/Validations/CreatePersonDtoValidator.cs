@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Store.Application.DTOS.Person.Validations
 {
-    public class UpdatePersonDtoValidator:AbstractValidator<UpdatePersonDto>
+    public class CreatePersonDtoValidator:AbstractValidator<CreatePersonDto>
     {
-        public UpdatePersonDtoValidator()
+        public CreatePersonDtoValidator()
         {
             Include(new IPersonDtoValidator());
 

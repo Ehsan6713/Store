@@ -11,9 +11,7 @@ namespace Store.Application.DTOS.Category.Validations
     {
         public UpdateCategoryDtoValidator()
         {
-            RuleFor(x => x.Name)
-                .NotEmpty().WithMessage("{PropertyName} is required")
-                .MaximumLength(200).WithMessage("max length for {PropertyName} is 200");
+            Include(new ICategoryDtoValidator());
         }
     }
 }

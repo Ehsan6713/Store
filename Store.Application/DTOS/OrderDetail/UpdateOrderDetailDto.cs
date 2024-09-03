@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Store.Application.DTOS.OrderDetail
 {
-    public class UpdateOrderDetailDto : BaseDto
+    public class UpdateOrderDetailDto : BaseDto, IOrderDetailDto
     {
         public int ProductId { get; set; }
         public int Quantity { get; set; }

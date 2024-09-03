@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Store.Application.DTOS.Order
 {
-    public class OrderDto:BaseDto
+    public class OrderDto:BaseDto, IOrderDto
     {
         public int UserId { get; set; }
         public decimal Discount { get; set; }

@@ -11,6 +11,7 @@ namespace Store.Application.Persistence.Contracts
         Task<T> Get(int id);
         Task<IReadOnlyList<T>> GetAll();
         Task<T> Update(T entry);
+        Task<bool> Exist(int id);
         Task<T> Add(T entry);
         Task<bool> Delete(T entry);
 
