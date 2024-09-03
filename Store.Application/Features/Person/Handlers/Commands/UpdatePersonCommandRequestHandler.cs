@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using Store.Application.DTOS.Person.Validations;
+using Store.Application.Exceptions;
 using Store.Application.Features.Person.Requests.Commands;
 using Store.Application.Persistence.Contracts;
 using System;
@@ -27,7 +28,7 @@ namespace Store.Application.Features.Person.Handlers.Commands
             var validator = new UpdatePersonDtoValidator();
             var validationResult = validator.Validate(request.UpdatePersonDto);
             if (validationResult.IsValid == false)
-                throw new Exception("Not Valid Object");
+                throw new ValidationException(validationResult);
             #endregion
             var person =await personRepository.Get(request.UpdatePersonDto.Id);
             mapper.Map(request.UpdatePersonDto, person);

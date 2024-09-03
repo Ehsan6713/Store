@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using Store.Application.DTOS.Product.Validations;
+using Store.Application.Exceptions;
 using Store.Application.Features.Products.Requests.Commands;
 using Store.Application.Persistence.Contracts;
 using System;
@@ -27,7 +28,7 @@ namespace Store.Application.Features.Products.Handlers.Commands
             var validator = new UpdateProductDtoValidator();
             var validationResult = validator.Validate(request.UpdateProductDto);
             if (validationResult.IsValid == false)
-                throw new Exception("Not Valid Object");
+                throw new ValidationException(validationResult);
             #endregion
 
             var product = await productRepository.Get(request.Id);

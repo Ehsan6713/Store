@@ -2,6 +2,7 @@
 using MediatR;
 using Store.Application.DTOS.Attachment.Validations;
 using Store.Application.DTOS.Brand.Validations;
+using Store.Application.Exceptions;
 using Store.Application.Features.Attachment.Requests.Command;
 using Store.Application.Persistence.Contracts;
 using System;
@@ -28,7 +29,7 @@ namespace Store.Application.Features.Attachment.Handlers.Commands
             var validator = new CreateAttachmentDtoValidator();
             var validationResult = validator.Validate(request.CreateAttachmentDto);
             if (validationResult.IsValid == false)
-                throw new Exception("Not Valid Object");
+                throw new ValidationException(validationResult);
             #endregion
             var attachment = mapper.Map<Domain.Attachment>(request.CreateAttachmentDto);
             await attachmentRepository.Add(attachment);

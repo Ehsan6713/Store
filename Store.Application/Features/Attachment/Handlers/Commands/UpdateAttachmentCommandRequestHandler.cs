@@ -2,6 +2,7 @@
 using MediatR;
 using Store.Application.DTOS.Attachment;
 using Store.Application.DTOS.Attachment.Validations;
+using Store.Application.Exceptions;
 using Store.Application.Features.Attachment.Requests.Command;
 using Store.Application.Persistence.Contracts;
 using System;
@@ -28,7 +29,7 @@ namespace Store.Application.Features.Attachment.Handlers.Commands
             var validator = new UpdateAttachmentDtoValidator();
             var validationResult = validator.Validate(request.UpdateAttachmentDto);
             if (validationResult.IsValid == false)
-                throw new Exception("Not Valid Object");
+                throw new ValidationException(validationResult);
             #endregion
 
             var attachment = await attachmentRepository.Get(request.UpdateAttachmentDto.Id);

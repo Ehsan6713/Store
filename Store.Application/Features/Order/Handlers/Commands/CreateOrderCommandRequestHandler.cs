@@ -2,6 +2,7 @@
 using MediatR;
 using Store.Application.DTOS.Order.Validations;
 using Store.Application.DTOS.OrderDetail.Validations;
+using Store.Application.Exceptions;
 using Store.Application.Features.Order.Requests.Commands;
 using Store.Application.Persistence.Contracts;
 using System;
@@ -28,7 +29,7 @@ namespace Store.Application.Features.Order.Handlers.Commands
             var validator = new CreateOrderDtoValidator();
             var validationResult = validator.Validate(request.CreateOrderDto);
             if (validationResult.IsValid == false)
-                throw new Exception("Not Valid Object");
+                throw new ValidationException(validationResult);
             #endregion
             var order = mapper.Map<Domain.Order>(request.CreateOrderDto);
             await orderRepository.Add(order);

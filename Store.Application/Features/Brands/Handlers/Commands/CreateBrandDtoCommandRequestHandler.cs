@@ -2,6 +2,7 @@
 using MediatR;
 using Store.Application.DTOS.Brand.Validations;
 using Store.Application.DTOS.Category.Validations;
+using Store.Application.Exceptions;
 using Store.Application.Features.Brands.Requests.Commands;
 using Store.Application.Persistence.Contracts;
 using Store.Domain;
@@ -29,7 +30,7 @@ namespace Store.Application.Features.Brands.Handlers.Commands
             var validator = new CreateBrandDtoValidator();
             var validationResult = validator.Validate(request.CreateBrandDto);
             if (validationResult.IsValid == false)
-                throw new Exception("Not Valid Object");
+                throw new ValidationException(validationResult);
             #endregion
             var brand = mapper.Map<Brand>(request.CreateBrandDto);
             await brandRepository.Add(brand);
