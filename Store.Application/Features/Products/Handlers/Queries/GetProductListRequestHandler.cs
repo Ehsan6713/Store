@@ -3,6 +3,7 @@ using MediatR;
 using Store.Application.DTOS.Product;
 using Store.Application.Features.Products.Requests.Queries;
 using Store.Application.Persistence.Contracts;
+using Store.Application.Resposes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Store.Application.Features.Products.Handlers.Queries
 {
-    public class GetProductListRequestHandler : IRequestHandler<GetProductListRequest, List<ProductDto>>
+    public class GetProductListRequestHandler : IRequestHandler<GetProductListRequest, BaseResponse<List<ProductDto>>>
     {
         private readonly IProductRepository productRepository;
         private readonly IMapper mapper;
@@ -21,10 +22,20 @@ namespace Store.Application.Features.Products.Handlers.Queries
             this.productRepository = productRepository;
             this.mapper = mapper;
         }
-        public async Task<List<ProductDto>> Handle(GetProductListRequest request, CancellationToken cancellationToken)
+        public async Task<BaseResponse<List<ProductDto>>> Handle(GetProductListRequest request, CancellationToken cancellationToken)
         {
-            var products = await productRepository.GetAll();
-            return mapper.Map<List<ProductDto>>(products);
+            var response = new BaseResponse<List<ProductDto>>();
+            try
+            {
+                var products = await productRepository.GetAll();
+                response.Data = mapper.Map<List<ProductDto>>(products);
+            }
+            catch (Exception ex)
+            {
+                response.Errors.Add(ex.Message);
+                response.Success = false;
+            }
+            return response;
         }
     }
 }

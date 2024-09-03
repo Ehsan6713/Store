@@ -3,6 +3,7 @@ using MediatR;
 using Store.Application.Exceptions;
 using Store.Application.Features.Order.Requests.Commands;
 using Store.Application.Persistence.Contracts;
+using Store.Application.Resposes;
 using Store.Domain;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Store.Application.Features.Order.Handlers.Commands
 {
-    public class DeleteOrderCommandRequestHandler : IRequestHandler<DeleteOrderCommandRequest>
+    public class DeleteOrderCommandRequestHandler : IRequestHandler<DeleteOrderCommandRequest, BaseResponse<Unit>>
     {
         private readonly IOrderRepository orderRepository;
         private readonly IMapper mapper;
@@ -22,14 +23,21 @@ namespace Store.Application.Features.Order.Handlers.Commands
             this.orderRepository = orderRepository;
             this.mapper = mapper;
         }
-        public async Task Handle(DeleteOrderCommandRequest request, CancellationToken cancellationToken)
+        public async Task<BaseResponse<Unit>> Handle(DeleteOrderCommandRequest request, CancellationToken cancellationToken)
         {
+            var baseCommandResponse = new BaseResponse<Unit>();
             var order = await orderRepository.Get(request.Id);
             if (order == null)
             {
-                throw new NotFoundException(nameof(Domain.Order), request.Id);
+                baseCommandResponse.Success = false;
+                baseCommandResponse.Errors.Add("Object with this id not found");
             }
-            await orderRepository.Delete(order);
+            else
+            {
+                await orderRepository.Delete(order);
+            }
+            baseCommandResponse.Data = Unit.Value;
+            return baseCommandResponse;
         }
     }
 }
