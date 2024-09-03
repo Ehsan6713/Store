@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Store.Application.DTOS.Product
 {
-    public class CreateProductDto : BaseDto
+    public class CreateProductDto 
     {
         public string Title { get; set; }
         public uint Stock { get; set; }

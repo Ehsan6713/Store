@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
+using Store.Application.DTOS.Category.Validations;
+using Store.Application.DTOS.Order.Validations;
 using Store.Application.Features.Category.Requests.Commands;
 using Store.Application.Persistence.Contracts;
 using Store.Domain;
@@ -22,6 +24,12 @@ namespace Store.Application.Features.Category.Handlers.Commands
         }
         public async Task<int> Handle(CreateCategoryCommandRequest request, CancellationToken cancellationToken)
         {
+            #region Validation
+            var validator = new CreateCategoryDtoValidator();
+            var validationResult = validator.Validate(request.CreateCategoryDto);
+            if (validationResult.IsValid == false)
+                throw new Exception("Not Valid Object");
+            #endregion
             var category = mapper.Map<Store.Domain.Category>(request.CreateCategoryDto);
             await categoryRepository.Add(category);
             return category.Id;

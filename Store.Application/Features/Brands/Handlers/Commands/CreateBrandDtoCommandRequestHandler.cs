@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
+using Store.Application.DTOS.Brand.Validations;
+using Store.Application.DTOS.Category.Validations;
 using Store.Application.Features.Brands.Requests.Commands;
 using Store.Application.Persistence.Contracts;
 using Store.Domain;
@@ -23,6 +25,12 @@ namespace Store.Application.Features.Brands.Handlers.Commands
         }
         public async Task<int> Handle(CreateBrandDtoCommandRequest request, CancellationToken cancellationToken)
         {
+            #region Validation
+            var validator = new CreateBrandDtoValidator();
+            var validationResult = validator.Validate(request.CreateBrandDto);
+            if (validationResult.IsValid == false)
+                throw new Exception("Not Valid Object");
+            #endregion
             var brand = mapper.Map<Brand>(request.CreateBrandDto);
             await brandRepository.Add(brand);
             return brand.Id;

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Store.Application.DTOS.OrderDetail.Validations;
 using Store.Application.Features.OrderDetail.Requests.Commands;
 using Store.Application.Persistence.Contracts;
 using System;
@@ -22,8 +23,14 @@ namespace Store.Application.Features.OrderDetail.Handlers.Commands
         }
         public async Task<Unit> Handle(UpdateOrderDetailCommandRequest request, CancellationToken cancellationToken)
         {
+            #region Validation
+            var validator = new UpdateOrderDetailDtoValidator();
+            var validationResult = validator.Validate(request.UpdateOrderDetailDto);
+            if (validationResult.IsValid == false)
+                throw new Exception("Not Valid Object");
+            #endregion
             var orderdetail = await orderDetailRepository.Get(request.Id);
-            mapper.Map(request.OrderDetailDto, orderdetail);
+            mapper.Map(request.UpdateOrderDetailDto, orderdetail);
             await orderDetailRepository.Update(orderdetail);
             return Unit.Value;
         }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Store.Application.DTOS.Person.Validations;
 using Store.Application.Features.Person.Requests.Commands;
 using Store.Application.Persistence.Contracts;
 using System;
@@ -22,6 +23,12 @@ namespace Store.Application.Features.Person.Handlers.Commands
         }
         public async Task<Unit> Handle(UpdatePersonCommandRequest request, CancellationToken cancellationToken)
         {
+            #region Validation
+            var validator = new UpdatePersonDtoValidation();
+            var validationResult = validator.Validate(request.UpdatePersonDto);
+            if (validationResult.IsValid == false)
+                throw new Exception("Not Valid Object");
+            #endregion
             var person =await personRepository.Get(request.UpdatePersonDto.Id);
             mapper.Map(request.UpdatePersonDto, person);
             await personRepository.Update(person);

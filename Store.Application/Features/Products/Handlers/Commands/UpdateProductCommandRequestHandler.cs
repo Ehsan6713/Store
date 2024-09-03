@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Store.Application.DTOS.Product.Validations;
 using Store.Application.Features.Products.Requests.Commands;
 using Store.Application.Persistence.Contracts;
 using System;
@@ -22,6 +23,12 @@ namespace Store.Application.Features.Products.Handlers.Commands
         }
         public async Task<Unit> Handle(UpdateProductCommandRequest request, CancellationToken cancellationToken)
         {
+            #region Validation
+            var validator = new UpdateProductDtoValidator();
+            var validationResult = validator.Validate(request.UpdateProductDto);
+            if (validationResult.IsValid == false)
+                throw new Exception("Not Valid Object");
+            #endregion
 
             var product = await productRepository.Get(request.Id);
             if (request.UpdateProductDto != null)

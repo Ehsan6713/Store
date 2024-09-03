@@ -10,6 +10,6 @@ namespace Store.Application.Features.Attachment.Requests.Command
 {
     public class UpdateAttachmentCommandRequest:IRequest<Unit>
     {
-        public AttachmentDto AttachmentDto { get; set; }
+        public UpdateAttachmentDto UpdateAttachmentDto { get; set; }
     }
 }

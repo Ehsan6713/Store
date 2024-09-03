@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Store.Application.DTOS.Brand
 {
-    public class CreateBrandDto : BaseDto
+    public class CreateBrandDto 
     {
         public string Name { get; set; }
     }

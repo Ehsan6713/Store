@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Store.Application.DTOS.Product.Validations;
 using Store.Application.Features.Products.Requests.Commands;
 using Store.Application.Persistence.Contracts;
 using System;
@@ -15,13 +16,20 @@ namespace Store.Application.Features.Products.Handlers.Commands
         private readonly IProductRepository productRepository;
         private readonly IMapper mapper;
 
-        public CreateProductCommandRequestHandler(IProductRepository productRepository,IMapper mapper)
+        public CreateProductCommandRequestHandler(IProductRepository productRepository, IMapper mapper)
         {
             this.productRepository = productRepository;
             this.mapper = mapper;
         }
         public async Task<int> Handle(CreateProductCommandRequest request, CancellationToken cancellationToken)
         {
+            #region Validation
+            var validator = new CreateProductDtoValidator();
+            var validationResult = validator.Validate(request.CreateProductDto);
+            if (validationResult.IsValid == false)
+                throw new Exception("Not Valid Object");
+            #endregion
+
             var product = mapper.Map<Domain.Product>(request.CreateProductDto);
             await productRepository.Add(product);
             return product.Id;

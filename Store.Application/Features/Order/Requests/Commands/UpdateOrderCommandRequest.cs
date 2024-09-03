@@ -11,6 +11,6 @@ namespace Store.Application.Features.Order.Requests.Commands
     public class UpdateOrderCommandRequest:IRequest<Unit>
     {
         public int Id { get; set; }
-        public OrderDto OrderDto{ get; set; }
+        public UpdateOrderDto UpdateOrderDto { get; set; }
     }
 }

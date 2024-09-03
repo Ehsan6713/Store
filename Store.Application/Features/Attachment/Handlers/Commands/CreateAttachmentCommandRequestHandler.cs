@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
+using Store.Application.DTOS.Attachment.Validations;
+using Store.Application.DTOS.Brand.Validations;
 using Store.Application.Features.Attachment.Requests.Command;
 using Store.Application.Persistence.Contracts;
 using System;
@@ -22,6 +24,12 @@ namespace Store.Application.Features.Attachment.Handlers.Commands
         }
         public async Task<int> Handle(CreateAttachmentCommandRequest request, CancellationToken cancellationToken)
         {
+            #region Validation
+            var validator = new CreateAttachmentDtoValidator();
+            var validationResult = validator.Validate(request.CreateAttachmentDto);
+            if (validationResult.IsValid == false)
+                throw new Exception("Not Valid Object");
+            #endregion
             var attachment = mapper.Map<Domain.Attachment>(request.CreateAttachmentDto);
             await attachmentRepository.Add(attachment);
             return attachment.Id;

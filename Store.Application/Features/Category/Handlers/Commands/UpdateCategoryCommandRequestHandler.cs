@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Store.Application.DTOS.Category.Validations;
 using Store.Application.Features.Category.Requests.Commands;
 using Store.Application.Persistence.Contracts;
 using System;
@@ -22,6 +23,12 @@ namespace Store.Application.Features.Category.Handlers.Commands
         }
         public async Task<Unit> Handle(UpdateCategoryCommandRequest request, CancellationToken cancellationToken)
         {
+            #region Validation
+            var validator = new UpdateCategoryDtoValidator();
+            var validationResult = validator.Validate(request.UpdateCategoryDto);
+            if (validationResult.IsValid == false)
+                throw new Exception("Not Valid Object");
+            #endregion
             var category =await categoryRepository.Get(request.UpdateCategoryDto.Id);
             mapper.Map(request.UpdateCategoryDto, category);
             await categoryRepository.Update(category);
