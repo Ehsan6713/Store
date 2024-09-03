@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Store.Application.Features.OrderDetail.Requests.Queries
 {
-    public class GetOrderDetailRequest:IRequest<List<OrderDetailDto>>
+    public class GetOrderDetailListRequest:IRequest<List<OrderDetailDto>>
     {
     }
 }

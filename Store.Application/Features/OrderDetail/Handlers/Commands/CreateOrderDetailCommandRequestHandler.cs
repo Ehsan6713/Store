@@ -22,7 +22,7 @@ namespace Store.Application.Features.OrderDetail.Handlers.Commands
         }
         public async Task<int> Handle(CreateOrderDetailCommandRequest request, CancellationToken cancellationToken)
         {
-            var orderDetail = mapper.Map<Domain.OrderDetail>(request.OrderDetailDto);
+            var orderDetail = mapper.Map<Domain.OrderDetail>(request.CreateOrderDetailDto);
             await orderDetailRepository.Add(orderDetail);
             return orderDetail.Id;
 

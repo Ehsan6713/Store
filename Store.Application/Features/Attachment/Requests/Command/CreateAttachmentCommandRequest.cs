@@ -10,6 +10,6 @@ namespace Store.Application.Features.Attachment.Requests.Command
 {
     public class CreateAttachmentCommandRequest:IRequest<int>
     {
-        public AttachmentDto AttachmentDto { get; set; }
+        public CreateAttachmentDto CreateAttachmentDto { get; set; }
     }
 }

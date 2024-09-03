@@ -10,6 +10,6 @@ namespace Store.Application.Features.OrderDetail.Requests.Commands
 {
     public class CreateOrderDetailCommandRequest:IRequest<int>
     {
-        public OrderDetailDto OrderDetailDto { get; set; }
+        public CreateOrderDetailDto CreateOrderDetailDto { get; set; }
     }
 }

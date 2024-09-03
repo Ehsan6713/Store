@@ -11,20 +11,20 @@ using System.Threading.Tasks;
 
 namespace Store.Application.Features.OrderDetail.Handlers.Queries
 {
-    public class GetOrderDetailListRequestHandler : IRequestHandler<GetOrderDetailListRequest, List<OrderDetailDto>>
+    public class GetOrderDetailDetailRequestHandler : IRequestHandler<GetOrderDetailDetailRequest, OrderDetailDto>
     {
         private readonly IOrderDetailRepository orderDetailRepository;
         private readonly IMapper mapper;
 
-        public GetOrderDetailListRequestHandler(IOrderDetailRepository orderDetailRepository,IMapper mapper)
+        public GetOrderDetailDetailRequestHandler(IOrderDetailRepository orderDetailRepository,IMapper mapper)
         {
             this.orderDetailRepository = orderDetailRepository;
             this.mapper = mapper;
         }
-        public async Task<List<OrderDetailDto>> Handle(GetOrderDetailListRequest request, CancellationToken cancellationToken)
+        public async Task<OrderDetailDto> Handle(GetOrderDetailDetailRequest request, CancellationToken cancellationToken)
         {
-            var orderDetails =await orderDetailRepository.GetAll();
-            return mapper.Map<List<OrderDetailDto>>(orderDetails);
+            var orderdetail = await orderDetailRepository.Get(request.Id);
+            return mapper.Map<OrderDetailDto>(orderdetail);
         }
     }
 }

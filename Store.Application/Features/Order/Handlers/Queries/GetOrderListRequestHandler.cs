@@ -11,17 +11,17 @@ using System.Threading.Tasks;
 
 namespace Store.Application.Features.Order.Handlers.Queries
 {
-    public class GetOrderRequestHandler : IRequestHandler<GetOrderRequest, List<OrderDto>>
+    public class GetOrderListRequestHandler : IRequestHandler<GetOrderListRequest, List<OrderDto>>
     {
         private readonly IOrderRepository orderRepository;
         private readonly IMapper mapper;
 
-        public GetOrderRequestHandler(IOrderRepository orderRepository,IMapper mapper)
+        public GetOrderListRequestHandler(IOrderRepository orderRepository,IMapper mapper)
         {
             this.orderRepository = orderRepository;
             this.mapper = mapper;
         }
-        public async Task<List<OrderDto>> Handle(GetOrderRequest request, CancellationToken cancellationToken)
+        public async Task<List<OrderDto>> Handle(GetOrderListRequest request, CancellationToken cancellationToken)
         {
             var orders =await orderRepository.GetAll();
             return mapper.Map<List<OrderDto>>(orders);

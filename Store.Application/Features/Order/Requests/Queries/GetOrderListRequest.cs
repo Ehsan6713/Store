@@ -6,10 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Store.Application.Features.Order.Requests.Commands
+namespace Store.Application.Features.Order.Requests.Queries
 {
-    public class CreateOrderCommandRequest:IRequest<int>
+    public class GetOrderListRequest : IRequest<List<OrderDto>>
     {
-        public CreateOrderDto CreateOrderDto { get; set; }
     }
 }

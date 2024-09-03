@@ -22,7 +22,7 @@ namespace Store.Application.Features.Attachment.Handlers.Commands
         }
         public async Task<int> Handle(CreateAttachmentCommandRequest request, CancellationToken cancellationToken)
         {
-            var attachment = mapper.Map<Domain.Attachment>(request.AttachmentDto);
+            var attachment = mapper.Map<Domain.Attachment>(request.CreateAttachmentDto);
             await attachmentRepository.Add(attachment);
             return attachment.Id;
         }

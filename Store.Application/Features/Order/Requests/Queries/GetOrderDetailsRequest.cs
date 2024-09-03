@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace Store.Application.Features.Order.Requests.Queries
 {
-    public class GetOrderRequest:IRequest<List<OrderDto>>
+    public class GetOrderDetailsRequest:IRequest<OrderDto>
     {
+        public int Id { get; set; }
     }
 }
