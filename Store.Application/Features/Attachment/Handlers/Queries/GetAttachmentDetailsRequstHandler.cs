@@ -2,7 +2,7 @@
 using MediatR;
 using Store.Application.DTOS.Attachment;
 using Store.Application.Features.Attachment.Requests.Queries;
-using Store.Application.Persistence.Contracts;
+using Store.Application.Contracts.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using Store.Application.Persistence.Contracts;
+using Store.Application.Contracts.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;

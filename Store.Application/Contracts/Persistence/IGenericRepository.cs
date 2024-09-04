@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Store.Application.Persistence.Contracts
+namespace Store.Application.Contracts.Persistence
 {
     public interface IGenericRepository<T> where T : class
     {
         Task<T> Get(int id);
         Task<IReadOnlyList<T>> GetAll();
-        Task<T> Update(T entry);
+        Task Update(T entry);
         Task<bool> Exist(int id);
         Task<T> Add(T entry);
-        Task<bool> Delete(T entry);
+        Task Delete(T entry);
 
 
     }

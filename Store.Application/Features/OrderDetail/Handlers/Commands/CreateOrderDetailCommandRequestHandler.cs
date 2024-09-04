@@ -4,12 +4,13 @@ using Store.Application.DTOS.OrderDetail.Validations;
 using Store.Application.DTOS.Person.Validations;
 using Store.Application.Exceptions;
 using Store.Application.Features.OrderDetail.Requests.Commands;
-using Store.Application.Persistence.Contracts;
+using Store.Application.Contracts.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Store.Application.Contracts.Persistence;
 
 namespace Store.Application.Features.OrderDetail.Handlers.Commands
 {

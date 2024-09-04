@@ -2,7 +2,7 @@
 using MediatR;
 using Store.Application.DTOS.Person;
 using Store.Application.Features.Person.Requests.Queries;
-using Store.Application.Persistence.Contracts;
+using Store.Application.Contracts.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;

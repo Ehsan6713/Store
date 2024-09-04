@@ -4,7 +4,7 @@ using Store.Application.DTOS.Attachment;
 using Store.Application.DTOS.Attachment.Validations;
 using Store.Application.Exceptions;
 using Store.Application.Features.Attachment.Requests.Command;
-using Store.Application.Persistence.Contracts;
+using Store.Application.Contracts.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;

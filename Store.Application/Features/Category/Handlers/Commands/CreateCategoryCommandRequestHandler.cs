@@ -4,7 +4,7 @@ using Store.Application.DTOS.Category.Validations;
 using Store.Application.DTOS.Order.Validations;
 using Store.Application.Exceptions;
 using Store.Application.Features.Category.Requests.Commands;
-using Store.Application.Persistence.Contracts;
+using Store.Application.Contracts.Persistence;
 using Store.Domain;
 using System;
 using System.Collections.Generic;

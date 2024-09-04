@@ -5,9 +5,10 @@ using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Store.Application.Persistence.Contracts
+namespace Store.Application.Contracts.Persistence
 {
     public interface IAttachmentRepository:IGenericRepository<Domain.Attachment>
     {
+        
     }
 }

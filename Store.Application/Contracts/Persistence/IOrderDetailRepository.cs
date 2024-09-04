@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Store.Application.Persistence.Contracts
+namespace Store.Application.Contracts.Persistence
 {
-    public interface IBrandRepository:IGenericRepository<Brand>
+    public interface IOrderDetailRepository:IGenericRepository<OrderDetail>
     {
     }
 }

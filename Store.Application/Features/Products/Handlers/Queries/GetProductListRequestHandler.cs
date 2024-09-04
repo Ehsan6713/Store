@@ -2,7 +2,7 @@
 using MediatR;
 using Store.Application.DTOS.Product;
 using Store.Application.Features.Products.Requests.Queries;
-using Store.Application.Persistence.Contracts;
+using Store.Application.Contracts.Persistence;
 using Store.Application.Resposes;
 using System;
 using System.Collections.Generic;

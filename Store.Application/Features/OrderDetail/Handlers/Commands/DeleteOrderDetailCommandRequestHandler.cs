@@ -2,7 +2,7 @@
 using MediatR;
 using Store.Application.Exceptions;
 using Store.Application.Features.OrderDetail.Requests.Commands;
-using Store.Application.Persistence.Contracts;
+using Store.Application.Contracts.Persistence;
 using Store.Domain;
 using System;
 using System.Collections.Generic;

@@ -3,7 +3,7 @@ using MediatR;
 using Store.Application.DTOS.Order.Validations;
 using Store.Application.Exceptions;
 using Store.Application.Features.Order.Requests.Commands;
-using Store.Application.Persistence.Contracts;
+using Store.Application.Contracts.Persistence;
 using Store.Application.Resposes;
 using System;
 using System.Collections.Generic;

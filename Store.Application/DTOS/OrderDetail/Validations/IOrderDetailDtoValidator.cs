@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using Store.Application.Persistence.Contracts;
+using Store.Application.Contracts.Persistence;
 
 namespace Store.Application.DTOS.OrderDetail.Validations
 {
