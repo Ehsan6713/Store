@@ -10,6 +10,7 @@ namespace Store.Domain
     public class OrderDetail:BaseDomainEntity
     {
         public Product Product { get; set; }
+        public int OrderId { get; set; }
         public int ProductId { get; set; }
         public int Quantity { get; set; }
         public decimal Discount { get; set; }

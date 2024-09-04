@@ -38,7 +38,10 @@ namespace Store.Application.UnitTests.Mocks
             {
                 return categories.FirstOrDefault(p => p.Id == id);
             });
-
+            mockRepository.Setup(x => x.Exist(It.IsAny<int>())).ReturnsAsync((int id) =>
+            {
+                return categories.Any(x => x.Id == id);
+            });
             return mockRepository;
         }
     }

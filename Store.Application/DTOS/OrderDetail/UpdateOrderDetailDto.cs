@@ -14,5 +14,6 @@ namespace Store.Application.DTOS.OrderDetail
         public int Quantity { get; set; }
         public decimal Discount { get; set; }
         public decimal UnitPrice { get; set; }
+        public int OrderId { get; set; }
     }
 }

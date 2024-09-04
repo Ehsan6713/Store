@@ -30,7 +30,10 @@ namespace Store.Application.UnitTests.Mocks
             {
                 lst.Remove(record);
             });
-
+            mock.Setup(x => x.Exist(It.IsAny<int>())).ReturnsAsync((int id) =>
+            {
+               return lst.Any(x=>x.Id==id);
+            });
             mock.Setup(x => x.GetAll()).ReturnsAsync(lst);
 
             return mock;
@@ -46,6 +49,7 @@ namespace Store.Application.UnitTests.Mocks
                 new Product(){ CreateTime=DateTime.Now,Title="Pavilio15",Description="A Labtop  Of Hp",BrandId=3,CategoryId=2,Stock=65,Id=5},
                 new Product(){ CreateTime=DateTime.Now,Title="Pavilio10",Description="A Labtop  Of Hp",BrandId=3,CategoryId=2,Stock=45,Id=6},
                 new Product(){ CreateTime=DateTime.Now,Title="Pavilio5",Description="A Labtop  Of Hp",BrandId=3,CategoryId=2,Stock=45,Id=7},
+                new Product(){ CreateTime=DateTime.Now,Title="Pavilio5",Description="A Labtop  Of Hp",BrandId=3,CategoryId=2,Stock=0,Id=8},
             };
             return lst;
         }

@@ -30,7 +30,10 @@ namespace Store.Application.UnitTests.Mocks
             {
                 lst.Remove(record);
             });
-
+            mock.Setup(x => x.Exist(It.IsAny<int>())).ReturnsAsync((int id) =>
+            {
+                return lst.Any(x => x.Id == id);
+            });
             mock.Setup(x => x.GetAll()).ReturnsAsync(lst);
 
             return mock;
@@ -39,10 +42,10 @@ namespace Store.Application.UnitTests.Mocks
         {
             var lst = new List<OrderDetail>()
             {
-                new OrderDetail(){Id=1, CreateTime=DateTime.Now, ProductId=1,Quantity=1,UnitPrice=50000},
-                new OrderDetail(){Id=2, CreateTime=DateTime.Now, ProductId=3,Quantity=2,UnitPrice=50000},
-                new OrderDetail(){Id=3, CreateTime=DateTime.Now, ProductId=4,Quantity=4,UnitPrice=200000},
-                new OrderDetail(){Id=4, CreateTime=DateTime.Now, ProductId=2,Quantity=8,UnitPrice=400000},
+                new OrderDetail(){Id=1, CreateTime=DateTime.Now, ProductId=1,Quantity=1,UnitPrice=50000,OrderId=1},
+                new OrderDetail(){Id=2, CreateTime=DateTime.Now, ProductId=3,Quantity=2,UnitPrice=50000,OrderId=1},
+                new OrderDetail(){Id=3, CreateTime=DateTime.Now, ProductId=4,Quantity=4,UnitPrice=200000,OrderId=2},
+                new OrderDetail(){Id=4, CreateTime=DateTime.Now, ProductId=2,Quantity=8,UnitPrice=400000,OrderId=3},
             };
             return lst;
         }

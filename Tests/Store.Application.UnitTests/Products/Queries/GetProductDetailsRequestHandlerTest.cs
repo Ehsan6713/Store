@@ -16,27 +16,25 @@ using System.Threading.Tasks;
 
 namespace Store.Application.UnitTests.Products.Queries
 {
-    public class GetProductListRequestHandlerTest
+    public class GetProductDetailsRequestHandlerTest
     {
         IMapper mapper;
         Mock<IProductRepository> mockRepository;
-        public GetProductListRequestHandlerTest()
+        public GetProductDetailsRequestHandlerTest()
         {
-            mockRepository = MockProductRepository.GetProductRepository();
+            mockRepository=MockProductRepository.GetProductRepository();
             var mapperConfiguration = new MapperConfiguration(x =>
             {
                 x.AddProfile<MappingProfile>();
             });
             mapper = mapperConfiguration.CreateMapper();
         }
-
         [Fact]
-        public async Task GetProductListRequestTest()
+        public async Task GetProductDetailRequestTest()
         {
-            var handler = new GetProductListRequestHandler(mockRepository.Object, mapper);
-            var result = await handler.Handle(new GetProductListRequest(), CancellationToken.None);
-            result.ShouldBeOfType<BaseResponse<List<ProductDto>>>();
-            result.Data.Count.ShouldBeGreaterThan(1);
+            var handler=new GetProductDetailRequestHandler(mockRepository.Object,mapper);
+            var result=await handler.Handle(new GetProductDetailRequest(), CancellationToken.None);
+            result.ShouldBeOfType<BaseResponse<ProductDto>>();
         }
     }
 }

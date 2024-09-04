@@ -30,7 +30,10 @@ namespace Store.Application.UnitTests.Mocks
             {
                 lst.Remove(record);
             });
-
+            mock.Setup(x => x.Exist(It.IsAny<int>())).ReturnsAsync((int id) =>
+            {
+                return lst.Any(x => x.Id == id);
+            });
             mock.Setup(x => x.GetAll()).ReturnsAsync(lst);
 
             return mock;

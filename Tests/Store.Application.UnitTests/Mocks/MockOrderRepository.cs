@@ -32,7 +32,10 @@ namespace Store.Application.UnitTests.Mocks
             });
 
             mock.Setup(x => x.GetAll()).ReturnsAsync(lst);
-
+            mock.Setup(x => x.Exist(It.IsAny<int>())).ReturnsAsync((int id) =>
+            {
+                return lst.Any(x => x.Id == id);
+            });
             return mock;
         }
         private static List<Order> GetList()

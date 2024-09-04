@@ -30,7 +30,8 @@ namespace Store.Application.Features.OrderDetail.Handlers.Commands
         {
             #region Validation
             var validator = new CreateOrderDetailDtoValidator(productRepository);
-            var validationResult = validator.Validate(request.CreateOrderDetailDto);
+            
+            var validationResult =await validator.ValidateAsync(request.CreateOrderDetailDto);
             if (validationResult.IsValid == false)
                 throw new ValidationException(validationResult);
             #endregion
