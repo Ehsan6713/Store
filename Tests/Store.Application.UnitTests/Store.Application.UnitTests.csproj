@@ -22,4 +22,9 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Store.Domain\Store.Domain.csproj" />
+    <ProjectReference Include="..\..\Store.Persistence\Store.Persistence.csproj" />
+  </ItemGroup>
+
 </Project>
