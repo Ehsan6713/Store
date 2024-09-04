@@ -20,29 +20,6 @@ namespace Store.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Person>()
-                 .HasOne(p => p.CreatedBy)
-                 .WithMany()
-                 .HasForeignKey(p => p.CreatedById)
-                 .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Product>()
-                  .HasOne(p => p.Brand)
-                  .WithMany()
-                  .HasForeignKey(p => p.BrandId)
-                  .OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<OrderDetail>()
-                 .HasOne(od => od.Product)
-                 .WithMany()
-                 .HasForeignKey(od => od.ProductId)
-                 .OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<Product>()
-                .HasOne(p => p.CreatedBy)
-                .WithMany()
-                .HasForeignKey(p => p.CreatedById)
-                .OnDelete(DeleteBehavior.Restrict);
-
-
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
         public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
@@ -61,7 +38,6 @@ namespace Store.Persistence
             {
                 if (item.State == EntityState.Added)
                 {
-                    item.Entity.CreatedById = 1;
                     item.Entity.CreateTime = DateTime.Now;
                 }
             }

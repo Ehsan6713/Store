@@ -18,6 +18,5 @@ namespace Store.Application.DTOS.Product
         public string Description { get; set; }
         public int BrandId { get; set; }
         public int CategoryId { get; set; }
-        public IList<AttachmentDto> Attachments { get; set; }
     }
 }

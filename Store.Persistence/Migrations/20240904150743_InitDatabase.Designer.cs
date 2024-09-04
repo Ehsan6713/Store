@@ -12,8 +12,8 @@ using Store.Persistence;
 namespace Store.Persistence.Migrations
 {
     [DbContext(typeof(StoreDbContext))]
-    [Migration("20240904072851_InitDb")]
-    partial class InitDb
+    [Migration("20240904150743_InitDatabase")]
+    partial class InitDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,7 +40,7 @@ namespace Store.Persistence.Migrations
                     b.Property<DateTime>("CreateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedById")
+                    b.Property<int?>("CreatedById")
                         .HasColumnType("int");
 
                     b.Property<string>("Format")
@@ -74,7 +74,7 @@ namespace Store.Persistence.Migrations
                     b.Property<DateTime>("CreateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedById")
+                    b.Property<int?>("CreatedById")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -86,6 +86,38 @@ namespace Store.Persistence.Migrations
                     b.HasIndex("CreatedById");
 
                     b.ToTable("Brands");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreateTime = new DateTime(2024, 9, 4, 18, 37, 41, 770, DateTimeKind.Local).AddTicks(4811),
+                            Name = "Samsung"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreateTime = new DateTime(2024, 9, 4, 18, 37, 41, 770, DateTimeKind.Local).AddTicks(4826),
+                            Name = "Lg"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreateTime = new DateTime(2024, 9, 4, 18, 37, 41, 770, DateTimeKind.Local).AddTicks(4828),
+                            Name = "IPhone"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreateTime = new DateTime(2024, 9, 4, 18, 37, 41, 770, DateTimeKind.Local).AddTicks(4830),
+                            Name = "Lenovo"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreateTime = new DateTime(2024, 9, 4, 18, 37, 41, 770, DateTimeKind.Local).AddTicks(4832),
+                            Name = "HP"
+                        });
                 });
 
             modelBuilder.Entity("Store.Domain.Category", b =>
@@ -99,7 +131,7 @@ namespace Store.Persistence.Migrations
                     b.Property<DateTime>("CreateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedById")
+                    b.Property<int?>("CreatedById")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -111,6 +143,20 @@ namespace Store.Persistence.Migrations
                     b.HasIndex("CreatedById");
 
                     b.ToTable("Categorys");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreateTime = new DateTime(2024, 9, 4, 18, 37, 41, 770, DateTimeKind.Local).AddTicks(6789),
+                            Name = "Cell Phone"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreateTime = new DateTime(2024, 9, 4, 18, 37, 41, 770, DateTimeKind.Local).AddTicks(6795),
+                            Name = "laptop"
+                        });
                 });
 
             modelBuilder.Entity("Store.Domain.Order", b =>
@@ -124,7 +170,7 @@ namespace Store.Persistence.Migrations
                     b.Property<DateTime>("CreateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedById")
+                    b.Property<int?>("CreatedById")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Discount")
@@ -154,7 +200,7 @@ namespace Store.Persistence.Migrations
                     b.Property<DateTime>("CreateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedById")
+                    b.Property<int?>("CreatedById")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Discount")
@@ -189,7 +235,7 @@ namespace Store.Persistence.Migrations
                     b.Property<DateTime>("CreateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedById")
+                    b.Property<int?>("CreatedById")
                         .HasColumnType("int");
 
                     b.Property<string>("FirstName")
@@ -208,6 +254,16 @@ namespace Store.Persistence.Migrations
                     b.HasIndex("CreatedById");
 
                     b.ToTable("People");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreateTime = new DateTime(2024, 9, 4, 18, 37, 41, 771, DateTimeKind.Local).AddTicks(3146),
+                            FirstName = "Javad",
+                            Gender = (byte)1,
+                            LastName = "Sagheb"
+                        });
                 });
 
             modelBuilder.Entity("Store.Domain.Product", b =>
@@ -227,7 +283,7 @@ namespace Store.Persistence.Migrations
                     b.Property<DateTime>("CreateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedById")
+                    b.Property<int?>("CreatedById")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -250,15 +306,35 @@ namespace Store.Persistence.Migrations
                     b.HasIndex("CreatedById");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BrandId = 5,
+                            CategoryId = 2,
+                            CreateTime = new DateTime(2024, 9, 4, 18, 37, 41, 771, DateTimeKind.Local).AddTicks(6975),
+                            Description = "Processor: Intel Core i5-1235U, 10 x 1.30 GHz with Turbo Boost up to 10 x 4.40 GHz\r\nDisplay: 39 cm (15.6 inches), anti-glare, 1920 x 1080 pixels Full HD IPS\r\nMemory: 16GB DDR4 RAM Hard Drive: 1000GB SSD\r\nOperating system: Windows 11\r\nFeatures: Full HD display, Intel UHD graphics, HDMI, card reader, no drive, USB Type-C",
+                            Stock = 0L,
+                            Title = "HP i5"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            BrandId = 1,
+                            CategoryId = 1,
+                            CreateTime = new DateTime(2024, 9, 4, 18, 37, 41, 771, DateTimeKind.Local).AddTicks(6982),
+                            Description = "For worry-free use: free warranty extension to 3 years - valid for customers who are resident in Germany\r\nEverything from your smartphone, all with AI: With the Galaxy S24 Ultra, you can easily edit photos, interpret calls in real time, and turn your notes into a clear summary¹ ² ³ ⁴.\r\nHigh resistance thanks to titanium: robustness, scratch resistance, water and dust protection thanks to Corning Gorilla Armor, the Galaxy S24 Ultra is ready for adventure, write, type and navigate with the integrated S Pen on the flat display\r\n200MP details that compete with reality: High resolution and AI processing, detects objects and reduces noise, zoom in the action, even at night - thanks to 1.6 times larger pixels and tele-OIS with larger angle6 8 / 9\r\nMobile gameplay: Fast computing power and almost twice the cooling system of the S23 Ultra – for a smooth graphics experience, high capacity battery and high energy efficiency for long gaming sessions6 ¹⁰ ¹¹ ¹ ¹²\r\nA bright adaptive Dynamic AMOLED display: 2,600 nits peak brightness, Redesigned Vision Booster improves contrast and colour representation for an impressive experience, reduced reflections and improved optical clarity thanks to Corning Gorilla Armor",
+                            Stock = 0L,
+                            Title = "s24"
+                        });
                 });
 
             modelBuilder.Entity("Store.Domain.Attachment", b =>
                 {
                     b.HasOne("Store.Domain.Person", "CreatedBy")
                         .WithMany()
-                        .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CreatedById");
 
                     b.HasOne("Store.Domain.Product", null)
                         .WithMany("Attachments")
@@ -271,9 +347,7 @@ namespace Store.Persistence.Migrations
                 {
                     b.HasOne("Store.Domain.Person", "CreatedBy")
                         .WithMany()
-                        .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CreatedById");
 
                     b.Navigation("CreatedBy");
                 });
@@ -282,9 +356,7 @@ namespace Store.Persistence.Migrations
                 {
                     b.HasOne("Store.Domain.Person", "CreatedBy")
                         .WithMany()
-                        .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CreatedById");
 
                     b.Navigation("CreatedBy");
                 });
@@ -293,9 +365,7 @@ namespace Store.Persistence.Migrations
                 {
                     b.HasOne("Store.Domain.Person", "CreatedBy")
                         .WithMany()
-                        .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CreatedById");
 
                     b.Navigation("CreatedBy");
                 });
@@ -304,9 +374,7 @@ namespace Store.Persistence.Migrations
                 {
                     b.HasOne("Store.Domain.Person", "CreatedBy")
                         .WithMany()
-                        .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CreatedById");
 
                     b.HasOne("Store.Domain.Product", "Product")
                         .WithMany()
@@ -323,9 +391,7 @@ namespace Store.Persistence.Migrations
                 {
                     b.HasOne("Store.Domain.Person", "CreatedBy")
                         .WithMany()
-                        .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("CreatedById");
 
                     b.Navigation("CreatedBy");
                 });
@@ -346,9 +412,7 @@ namespace Store.Persistence.Migrations
 
                     b.HasOne("Store.Domain.Person", "CreatedBy")
                         .WithMany()
-                        .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("CreatedById");
 
                     b.Navigation("Brand");
 

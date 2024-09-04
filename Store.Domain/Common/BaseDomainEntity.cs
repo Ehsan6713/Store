@@ -13,7 +13,7 @@ namespace Store.Domain.Common
     {
         public int Id { get; set; }
         public DateTime CreateTime { get; set; }
-        public int CreatedById { get; set; }
-        public Person CreatedBy { get; set; }
+        public int? CreatedById { get; set; }
+        public Person? CreatedBy { get; set; }
     }
 }
