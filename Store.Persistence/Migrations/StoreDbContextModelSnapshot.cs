@@ -88,31 +88,31 @@ namespace Store.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            CreateTime = new DateTime(2024, 9, 4, 18, 37, 41, 770, DateTimeKind.Local).AddTicks(4811),
+                            CreateTime = new DateTime(2024, 9, 5, 2, 2, 41, 503, DateTimeKind.Local).AddTicks(9759),
                             Name = "Samsung"
                         },
                         new
                         {
                             Id = 2,
-                            CreateTime = new DateTime(2024, 9, 4, 18, 37, 41, 770, DateTimeKind.Local).AddTicks(4826),
+                            CreateTime = new DateTime(2024, 9, 5, 2, 2, 41, 503, DateTimeKind.Local).AddTicks(9775),
                             Name = "Lg"
                         },
                         new
                         {
                             Id = 3,
-                            CreateTime = new DateTime(2024, 9, 4, 18, 37, 41, 770, DateTimeKind.Local).AddTicks(4828),
+                            CreateTime = new DateTime(2024, 9, 5, 2, 2, 41, 503, DateTimeKind.Local).AddTicks(9776),
                             Name = "IPhone"
                         },
                         new
                         {
                             Id = 4,
-                            CreateTime = new DateTime(2024, 9, 4, 18, 37, 41, 770, DateTimeKind.Local).AddTicks(4830),
+                            CreateTime = new DateTime(2024, 9, 5, 2, 2, 41, 503, DateTimeKind.Local).AddTicks(9777),
                             Name = "Lenovo"
                         },
                         new
                         {
                             Id = 5,
-                            CreateTime = new DateTime(2024, 9, 4, 18, 37, 41, 770, DateTimeKind.Local).AddTicks(4832),
+                            CreateTime = new DateTime(2024, 9, 5, 2, 2, 41, 503, DateTimeKind.Local).AddTicks(9779),
                             Name = "HP"
                         });
                 });
@@ -145,13 +145,13 @@ namespace Store.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            CreateTime = new DateTime(2024, 9, 4, 18, 37, 41, 770, DateTimeKind.Local).AddTicks(6789),
+                            CreateTime = new DateTime(2024, 9, 5, 2, 2, 41, 504, DateTimeKind.Local).AddTicks(2655),
                             Name = "Cell Phone"
                         },
                         new
                         {
                             Id = 2,
-                            CreateTime = new DateTime(2024, 9, 4, 18, 37, 41, 770, DateTimeKind.Local).AddTicks(6795),
+                            CreateTime = new DateTime(2024, 9, 5, 2, 2, 41, 504, DateTimeKind.Local).AddTicks(2663),
                             Name = "laptop"
                         });
                 });
@@ -202,6 +202,9 @@ namespace Store.Persistence.Migrations
 
                     b.Property<decimal>("Discount")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -256,7 +259,7 @@ namespace Store.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            CreateTime = new DateTime(2024, 9, 4, 18, 37, 41, 771, DateTimeKind.Local).AddTicks(3146),
+                            CreateTime = new DateTime(2024, 9, 5, 2, 2, 41, 505, DateTimeKind.Local).AddTicks(115),
                             FirstName = "Javad",
                             Gender = (byte)1,
                             LastName = "Sagheb"
@@ -310,7 +313,7 @@ namespace Store.Persistence.Migrations
                             Id = 1,
                             BrandId = 5,
                             CategoryId = 2,
-                            CreateTime = new DateTime(2024, 9, 4, 18, 37, 41, 771, DateTimeKind.Local).AddTicks(6975),
+                            CreateTime = new DateTime(2024, 9, 5, 2, 2, 41, 505, DateTimeKind.Local).AddTicks(4947),
                             Description = "Processor: Intel Core i5-1235U, 10 x 1.30 GHz with Turbo Boost up to 10 x 4.40 GHz\r\nDisplay: 39 cm (15.6 inches), anti-glare, 1920 x 1080 pixels Full HD IPS\r\nMemory: 16GB DDR4 RAM Hard Drive: 1000GB SSD\r\nOperating system: Windows 11\r\nFeatures: Full HD display, Intel UHD graphics, HDMI, card reader, no drive, USB Type-C",
                             Stock = 0L,
                             Title = "HP i5"
@@ -320,7 +323,7 @@ namespace Store.Persistence.Migrations
                             Id = 2,
                             BrandId = 1,
                             CategoryId = 1,
-                            CreateTime = new DateTime(2024, 9, 4, 18, 37, 41, 771, DateTimeKind.Local).AddTicks(6982),
+                            CreateTime = new DateTime(2024, 9, 5, 2, 2, 41, 505, DateTimeKind.Local).AddTicks(4957),
                             Description = "For worry-free use: free warranty extension to 3 years - valid for customers who are resident in Germany\r\nEverything from your smartphone, all with AI: With the Galaxy S24 Ultra, you can easily edit photos, interpret calls in real time, and turn your notes into a clear summary¹ ² ³ ⁴.\r\nHigh resistance thanks to titanium: robustness, scratch resistance, water and dust protection thanks to Corning Gorilla Armor, the Galaxy S24 Ultra is ready for adventure, write, type and navigate with the integrated S Pen on the flat display\r\n200MP details that compete with reality: High resolution and AI processing, detects objects and reduces noise, zoom in the action, even at night - thanks to 1.6 times larger pixels and tele-OIS with larger angle6 8 / 9\r\nMobile gameplay: Fast computing power and almost twice the cooling system of the S23 Ultra – for a smooth graphics experience, high capacity battery and high energy efficiency for long gaming sessions6 ¹⁰ ¹¹ ¹ ¹²\r\nA bright adaptive Dynamic AMOLED display: 2,600 nits peak brightness, Redesigned Vision Booster improves contrast and colour representation for an impressive experience, reduced reflections and improved optical clarity thanks to Corning Gorilla Armor",
                             Stock = 0L,
                             Title = "s24"
