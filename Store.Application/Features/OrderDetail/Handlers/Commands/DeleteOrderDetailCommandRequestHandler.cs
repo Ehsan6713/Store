@@ -9,27 +9,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Store.Application.Resposes;
 
 namespace Store.Application.Features.OrderDetail.Handlers.Commands
 {
-    public class DeleteOrderDetailCommandRequestHandler : IRequestHandler<DeleteOrderDetailCommandRequest>
+    public class DeleteOrderDetailCommandRequestHandler : IRequestHandler<DeleteOrderDetailCommandRequest, BaseResponse<Unit>>
     {
         private readonly IOrderDetailRepository orderDetailRepository;
         private readonly IMapper mapper;
 
-        public DeleteOrderDetailCommandRequestHandler(IOrderDetailRepository orderDetailRepository,IMapper mapper)
+        public DeleteOrderDetailCommandRequestHandler(IOrderDetailRepository orderDetailRepository, IMapper mapper)
         {
             this.orderDetailRepository = orderDetailRepository;
             this.mapper = mapper;
         }
-        public async Task Handle(DeleteOrderDetailCommandRequest request, CancellationToken cancellationToken)
+        public async Task<BaseResponse<Unit>> Handle(DeleteOrderDetailCommandRequest request, CancellationToken cancellationToken)
         {
-            var orderDetail =await orderDetailRepository.Get(request.Id);
+            var respons = new BaseResponse<Unit>();
+            var orderDetail = await orderDetailRepository.Get(request.Id);
             if (orderDetail == null)
             {
-                throw new NotFoundException(nameof(Domain.OrderDetail), request.Id);
+                respons.Success = false;
+                respons.Errors.Add($"Not Found Id {request.Id}");
+                respons.Message = "Not Found";
             }
-            await orderDetailRepository.Delete(orderDetail);
+            else
+            {
+                await orderDetailRepository.Delete(orderDetail);
+                respons.Data = Unit.Value;
+            }
+            return respons;
         }
     }
 }

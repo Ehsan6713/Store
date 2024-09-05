@@ -42,7 +42,7 @@ namespace Store.Api.Controllers
         public async Task<ActionResult<int>> Post([FromBody] CreateOrderDetailDto createOrderDetailDto)
         {
             var respose = await mediator.Send(new CreateOrderDetailCommandRequest() { CreateOrderDetailDto = createOrderDetailDto });
-            return respose;
+            return respose.Data;
         }
 
         // PUT api/<OrderDetailController>/5
@@ -50,7 +50,7 @@ namespace Store.Api.Controllers
         public async Task<ActionResult<Unit>> Put(int id, [FromBody] UpdateOrderDetailDto updateOrderDetailDto)
         {
             var respose = await mediator.Send(new UpdateOrderDetailCommandRequest() { UpdateOrderDetailDto = updateOrderDetailDto, Id = id });
-            return respose;
+            return respose.Data;
         }
 
         // DELETE api/<OrderDetailController>/5

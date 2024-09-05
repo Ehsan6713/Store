@@ -9,10 +9,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Store.Application.Resposes;
 
 namespace Store.Application.Features.Category.Handlers.Commands
 {
-    public class DeleteCategoryCommandRequestHandler : IRequestHandler<DeleteCategoryCommandRequest>
+    public class DeleteCategoryCommandRequestHandler : IRequestHandler<DeleteCategoryCommandRequest, BaseResponse<Unit>>
     {
         private readonly ICategoryRepository categoryRepository;
         private readonly IMapper mapper;
@@ -22,14 +23,22 @@ namespace Store.Application.Features.Category.Handlers.Commands
             this.categoryRepository = categoryRepository;
             this.mapper = mapper;
         }
-        public async Task Handle(DeleteCategoryCommandRequest request, CancellationToken cancellationToken)
+        public async Task<BaseResponse<Unit>> Handle(DeleteCategoryCommandRequest request, CancellationToken cancellationToken)
         {
+            var respons = new BaseResponse<Unit>();
             var category = await categoryRepository.Get(request.Id);
             if (category == null)
             {
-                throw new NotFoundException(nameof(Domain.Category), request.Id);
+                respons.Success = false;
+                respons.Errors.Add($"Not Found Id {request.Id}");
+                respons.Message = "Not Found";
             }
-            await categoryRepository.Delete(category);
+            else
+            {
+                await categoryRepository.Delete(category);
+                respons.Data = Unit.Value;
+            }
+            return respons;
         }
     }
 }

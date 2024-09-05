@@ -9,10 +9,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Store.Application.Resposes;
 
 namespace Store.Application.Features.Person.Handlers.Commands
 {
-    public class UpdatePersonCommandRequestHandler : IRequestHandler<UpdatePersonCommandRequest, Unit>
+    public class UpdatePersonCommandRequestHandler : IRequestHandler<UpdatePersonCommandRequest, BaseResponse<Unit>>
     {
         private readonly IPersonRepository personRepository;
         private readonly IMapper mapper;
@@ -22,18 +23,27 @@ namespace Store.Application.Features.Person.Handlers.Commands
             this.personRepository = personRepository;
             this.mapper = mapper;
         }
-        public async Task<Unit> Handle(UpdatePersonCommandRequest request, CancellationToken cancellationToken)
+        public async Task<BaseResponse<Unit>> Handle(UpdatePersonCommandRequest request, CancellationToken cancellationToken)
         {
+            var respons = new BaseResponse<Unit>();
             #region Validation
             var validator = new UpdatePersonDtoValidator();
             var validationResult = validator.Validate(request.UpdatePersonDto);
             if (validationResult.IsValid == false)
-                throw new ValidationException(validationResult);
+            {
+                respons.Success = false;
+                respons.Errors = validationResult.Errors.Select(x => x.ErrorMessage).ToList();
+                respons.Message = "Error Occer";
+            }
             #endregion
-            var person =await personRepository.Get(request.UpdatePersonDto.Id);
-            mapper.Map(request.UpdatePersonDto, person);
-            await personRepository.Update(person);
-            return Unit.Value;
+            else
+            {
+                var person = await personRepository.Get(request.UpdatePersonDto.Id);
+                mapper.Map(request.UpdatePersonDto, person);
+                await personRepository.Update(person);
+                respons.Data = Unit.Value;
+            }
+            return respons;
         }
     }
 }

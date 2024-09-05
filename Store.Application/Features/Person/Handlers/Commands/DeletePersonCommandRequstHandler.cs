@@ -9,10 +9,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Store.Application.Resposes;
 
 namespace Store.Application.Features.Person.Handlers.Commands
 {
-    public class DeletePersonCommandRequstHandler : IRequestHandler<DeletePersonCommandRequst>
+    public class DeletePersonCommandRequstHandler : IRequestHandler<DeletePersonCommandRequst, BaseResponse<Unit>>
     {
         private readonly IPersonRepository personRepository;
         private readonly IMapper mapper;
@@ -22,14 +23,22 @@ namespace Store.Application.Features.Person.Handlers.Commands
             this.personRepository = personRepository;
             this.mapper = mapper;
         }
-        public async Task Handle(DeletePersonCommandRequst request, CancellationToken cancellationToken)
+        public async Task<BaseResponse<Unit>> Handle(DeletePersonCommandRequst request, CancellationToken cancellationToken)
         {
+            var respons = new BaseResponse<Unit>();
             var person=await personRepository.Get(request.Id);
             if (person == null)
             {
-                throw new NotFoundException(nameof(Domain.Person), request.Id);
+                respons.Success = false;
+                respons.Errors.Add($"Not Found Id {request.Id}");
+                respons.Message = "Not Found";
             }
-            await personRepository.Delete(person);
+            else
+            {
+                await personRepository.Delete(person);
+                respons.Data = Unit.Value;
+            }
+            return respons;
         }
     }
 }

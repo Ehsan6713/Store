@@ -39,7 +39,7 @@ namespace Store.Api.Controllers
         public async Task<ActionResult<int>> Post([FromBody] CreateCategoryDto createCategoryDto)
         {
             var response = await mediator.Send(new CreateCategoryCommandRequest() { CreateCategoryDto = createCategoryDto });
-            return response;
+            return response.Data;
         }
 
         // PUT api/<CategoryController>/5
