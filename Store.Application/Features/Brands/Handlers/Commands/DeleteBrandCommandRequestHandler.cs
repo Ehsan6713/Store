@@ -9,10 +9,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Store.Application.Resposes;
 
 namespace Store.Application.Features.Brands.Handlers.Commands
 {
-    public class DeleteBrandCommandRequestHandler : IRequestHandler<DeleteBrandCommandRequest>
+    public class DeleteBrandCommandRequestHandler : IRequestHandler<DeleteBrandCommandRequest, BaseResponse<Unit>>
     {
         private readonly IBrandRepository brandRepository;
         private readonly IMapper mapper;
@@ -22,14 +23,22 @@ namespace Store.Application.Features.Brands.Handlers.Commands
             this.brandRepository = brandRepository;
             this.mapper = mapper;
         }
-        public async Task Handle(DeleteBrandCommandRequest request, CancellationToken cancellationToken)
+        public async Task<BaseResponse<Unit>> Handle(DeleteBrandCommandRequest request, CancellationToken cancellationToken)
         {
-            var brand =await brandRepository.Get(request.Id);
+            var respons = new BaseResponse<Unit>();
+            var brand = await brandRepository.Get(request.Id);
             if (brand == null)
             {
-                throw new NotFoundException(nameof(Domain.Brand), request.Id);
+                respons.Success = false;
+                respons.Errors.Add($"Not Found Id {request.Id}");
+                respons.Message = $"Not Found {request.Id}";
             }
-            await brandRepository.Delete(brand);
+            else
+            {
+                await brandRepository.Delete(brand);
+                respons.Data = Unit.Value;
+            }
+            return respons;
 
 
         }

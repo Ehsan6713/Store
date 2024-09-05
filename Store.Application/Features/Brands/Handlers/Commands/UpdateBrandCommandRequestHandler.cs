@@ -9,32 +9,41 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Store.Application.Resposes;
 
 namespace Store.Application.Features.Brands.Handlers.Commands
 {
-    public class UpdateBrandCommandRequestHandler : IRequestHandler<UpdateBrandCommandRequest, Unit>
+    public class UpdateBrandCommandRequestHandler : IRequestHandler<UpdateBrandCommandRequest, BaseResponse<Unit>>
     {
         private readonly IBrandRepository brandRepository;
         private readonly IMapper mapper;
 
-        public UpdateBrandCommandRequestHandler(IBrandRepository brandRepository,IMapper mapper)
+        public UpdateBrandCommandRequestHandler(IBrandRepository brandRepository, IMapper mapper)
         {
             this.brandRepository = brandRepository;
             this.mapper = mapper;
         }
-        public async Task<Unit> Handle(UpdateBrandCommandRequest request, CancellationToken cancellationToken)
+        public async Task<BaseResponse<Unit>> Handle(UpdateBrandCommandRequest request, CancellationToken cancellationToken)
         {
+            var respons = new BaseResponse<Unit>();
             #region Validation
             var validator = new UpdateBrandDtoValidator();
             var validationResult = validator.Validate(request.UpdateBrandDto);
             if (validationResult.IsValid == false)
-                throw new ValidationException(validationResult);
+            {
+                respons.Success = false;
+                respons.Errors = validationResult.Errors.Select(x => x.ErrorMessage).ToList();
+                respons.Message = "Error Occer";
+            }
             #endregion
-
-            var brand =await brandRepository.Get(request.UpdateBrandDto.Id);
-            mapper.Map(request.UpdateBrandDto, brand);
-            await brandRepository.Update(brand);
-            return Unit.Value;
+            else
+            {
+                var brand = await brandRepository.Get(request.UpdateBrandDto.Id);
+                mapper.Map(request.UpdateBrandDto, brand);
+                await brandRepository.Update(brand);
+                respons.Data = Unit.Value;
+            }
+            return respons;
         }
     }
 }
