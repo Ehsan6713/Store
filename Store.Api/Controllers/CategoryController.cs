@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Store.Application.DTOS.Category;
 using Store.Application.Features.Category.Requests.Commands;
 using Store.Application.Features.Category.Requests.Queries;
+using Store.Application.Features.Person.Handlers.Commands;
+using Store.Application.Resposes;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -36,25 +38,26 @@ namespace Store.Api.Controllers
 
         // POST api/<CategoryController>
         [HttpPost]
-        public async Task<ActionResult<int>> Post([FromBody] CreateCategoryDto createCategoryDto)
+        public async Task<ActionResult<BaseResponse<int>>> Post([FromBody] CreateCategoryDto createCategoryDto)
         {
             var response = await mediator.Send(new CreateCategoryCommandRequest() { CreateCategoryDto = createCategoryDto });
-            return response.Data;
+            return response;
         }
 
         // PUT api/<CategoryController>/5
         [HttpPut("{id}")]
-        public async Task<ActionResult> Put(int id, [FromBody] UpdateCategoryDto updateCategoryDto)
+        public async Task<ActionResult<BaseResponse<Unit>>> Put(int id, [FromBody] UpdateCategoryDto updateCategoryDto)
         {
             var response = await mediator.Send(new UpdateCategoryCommandRequest() { UpdateCategoryDto = updateCategoryDto });
-            return NoContent();
+            return response;
         }
 
         // DELETE api/<CategoryController>/5
         [HttpDelete("{id}")]
-        public async Task Delete(int id)
+        public async Task<ActionResult<BaseResponse<Unit>>> Delete(int id)
         {
-            await mediator.Send(new DeleteCategoryCommandRequest() { Id = id });
+            var response = await mediator.Send(new DeleteCategoryCommandRequest() { Id = id });
+            return response;
         }
     }
 }

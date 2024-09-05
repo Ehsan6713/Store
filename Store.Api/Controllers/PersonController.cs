@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Store.Application.DTOS.Order;
 using Store.Application.DTOS.Person;
 using Store.Application.Features.Order.Requests.Queries;
+using Store.Application.Features.Person.Handlers.Commands;
 using Store.Application.Features.Person.Requests.Commands;
 using Store.Application.Features.Person.Requests.Queries;
 using Store.Application.Resposes;
@@ -39,25 +40,26 @@ namespace Store.Api.Controllers
 
         // POST api/<PersonController>
         [HttpPost]
-        public async Task<ActionResult<int>> Post([FromBody] CreatePersonDto createPersonDto)
+        public async Task<ActionResult<BaseResponse<int>>> Post([FromBody] CreatePersonDto createPersonDto)
         {
             var respose = await mediator.Send(new CreatePersonCommandRequest() { CreatePersonDto = createPersonDto });
-            return respose.Data;
+            return respose;
         }
 
         // PUT api/<PersonController>/5
         [HttpPut("{id}")]
-        public async Task<ActionResult<Unit>> Put(int id, [FromBody] UpdatePersonDto updatePersonDto)
+        public async Task<ActionResult<BaseResponse<Unit>>> Put(int id, [FromBody] UpdatePersonDto updatePersonDto)
         {
             var respose = await mediator.Send(new UpdatePersonCommandRequest() { UpdatePersonDto = updatePersonDto });
-            return respose.Data;
+            return respose;
         }
 
         // DELETE api/<PersonController>/5
         [HttpDelete("{id}")]
-        public async Task Delete(int id)
+        public async Task<BaseResponse<Unit>> Delete(int id)
         {
-            await mediator.Send(new DeletePersonCommandRequst() { Id = id });
+           var response= await mediator.Send(new DeletePersonCommandRequst() { Id = id });
+            return response;
         }
     }
 }

@@ -5,6 +5,7 @@ using Store.Application.DTOS.OrderDetail;
 using Store.Application.Features.Order.Requests.Queries;
 using Store.Application.Features.OrderDetail.Requests.Commands;
 using Store.Application.Features.OrderDetail.Requests.Queries;
+using Store.Application.Features.Person.Handlers.Commands;
 using Store.Application.Resposes;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -39,25 +40,26 @@ namespace Store.Api.Controllers
 
         // POST api/<OrderDetailController>
         [HttpPost]
-        public async Task<ActionResult<int>> Post([FromBody] CreateOrderDetailDto createOrderDetailDto)
+        public async Task<ActionResult<BaseResponse<int>>> Post([FromBody] CreateOrderDetailDto createOrderDetailDto)
         {
             var respose = await mediator.Send(new CreateOrderDetailCommandRequest() { CreateOrderDetailDto = createOrderDetailDto });
-            return respose.Data;
+            return respose;
         }
 
         // PUT api/<OrderDetailController>/5
         [HttpPut("{id}")]
-        public async Task<ActionResult<Unit>> Put(int id, [FromBody] UpdateOrderDetailDto updateOrderDetailDto)
+        public async Task<ActionResult<BaseResponse<Unit>>> Put(int id, [FromBody] UpdateOrderDetailDto updateOrderDetailDto)
         {
             var respose = await mediator.Send(new UpdateOrderDetailCommandRequest() { UpdateOrderDetailDto = updateOrderDetailDto, Id = id });
-            return respose.Data;
+            return respose;
         }
 
         // DELETE api/<OrderDetailController>/5
         [HttpDelete("{id}")]
-        public async Task Delete(int id)
+        public async Task<BaseResponse<Unit>> Delete(int id)
         {
-            await mediator.Send(new DeleteOrderDetailCommandRequest() { Id = id });
+            var response = await mediator.Send(new DeleteOrderDetailCommandRequest() { Id = id });
+            return response;
         }
     }
 }
