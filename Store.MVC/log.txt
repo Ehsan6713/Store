@@ -1,0 +1,41 @@
+2024-09-06 18:22:29.353 +03:30 [INF] User profile is available. Using 'C:\Users\HP\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-09-06 18:22:30.016 +03:30 [INF] Now listening on: http://localhost:5291
+2024-09-06 18:22:30.155 +03:30 [INF] Application started. Press Ctrl+C to shut down.
+2024-09-06 18:22:30.194 +03:30 [INF] Hosting environment: Development
+2024-09-06 18:22:30.400 +03:30 [INF] Content root path: D:\Git\Store\Store\Store.MVC
+2024-09-06 18:22:30.991 +03:30 [INF] Request starting HTTP/1.1 GET http://localhost:5291/ - null null
+2024-09-06 18:22:31.496 +03:30 [WRN] Failed to determine the https port for redirect.
+2024-09-06 18:22:31.583 +03:30 [INF] Executing endpoint 'Store.MVC.Controllers.HomeController.Index (Store.MVC)'
+2024-09-06 18:22:31.732 +03:30 [INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Store.MVC.Controllers.HomeController (Store.MVC).
+2024-09-06 18:22:32.014 +03:30 [INF] Executing action method Store.MVC.Controllers.HomeController.Index (Store.MVC) - Validation state: "Valid"
+2024-09-06 18:22:32.035 +03:30 [INF] Executed action method Store.MVC.Controllers.HomeController.Index (Store.MVC), returned result Microsoft.AspNetCore.Mvc.ViewResult in 1.7302ms.
+2024-09-06 18:22:32.078 +03:30 [INF] Executing ViewResult, running view Index.
+2024-09-06 18:22:32.480 +03:30 [INF] Executed ViewResult - view Index executed in 426.4037ms.
+2024-09-06 18:22:32.495 +03:30 [INF] Executed action Store.MVC.Controllers.HomeController.Index (Store.MVC) in 755.1668ms
+2024-09-06 18:22:32.537 +03:30 [INF] Executed endpoint 'Store.MVC.Controllers.HomeController.Index (Store.MVC)'
+2024-09-06 18:22:32.556 +03:30 [INF] Request finished HTTP/1.1 GET http://localhost:5291/ - 200 null text/html; charset=utf-8 1586.192ms
+2024-09-06 18:22:32.926 +03:30 [INF] Request starting HTTP/1.1 GET http://localhost:5291/Store.MVC.styles.css?v=m5sub4ezvQeYGsDIKECNIG2S0lNxwBnftDgj7urM0Hc - null null
+2024-09-06 18:22:32.956 +03:30 [INF] The file /Store.MVC.styles.css was not modified
+2024-09-06 18:22:32.962 +03:30 [INF] Request finished HTTP/1.1 GET http://localhost:5291/Store.MVC.styles.css?v=m5sub4ezvQeYGsDIKECNIG2S0lNxwBnftDgj7urM0Hc - 304 null text/css 36.6197ms
+2024-09-06 18:22:34.189 +03:30 [INF] Request starting HTTP/1.1 GET http://localhost:5291/_framework/aspnetcore-browser-refresh.js - null null
+2024-09-06 18:22:34.199 +03:30 [INF] Request finished HTTP/1.1 GET http://localhost:5291/_framework/aspnetcore-browser-refresh.js - 200 13753 application/javascript; charset=utf-8 10.8547ms
+2024-09-06 18:22:34.234 +03:30 [INF] Request starting HTTP/1.1 GET http://localhost:5291/_vs/browserLink - null null
+2024-09-06 18:22:34.357 +03:30 [INF] Request finished HTTP/1.1 GET http://localhost:5291/_vs/browserLink - 200 null text/javascript; charset=UTF-8 123.1497ms
+2024-09-06 18:23:32.699 +03:30 [INF] Request starting HTTP/1.1 GET http://localhost:5291/Brand - null null
+2024-09-06 18:23:32.806 +03:30 [INF] Executing endpoint 'Store.MVC.Controllers.BrandController.Index (Store.MVC)'
+2024-09-06 18:23:32.827 +03:30 [INF] Route matched with {action = "Index", controller = "Brand"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult] Index() on controller Store.MVC.Controllers.BrandController (Store.MVC).
+2024-09-06 18:23:33.411 +03:30 [INF] Executing action method Store.MVC.Controllers.BrandController.Index (Store.MVC) - Validation state: "Valid"
+2024-09-06 18:23:33.436 +03:30 [INF] Start processing HTTP request GET http://localhost:5251/api/Brand
+2024-09-06 18:23:33.440 +03:30 [INF] Sending HTTP request GET http://localhost:5251/api/Brand
+2024-09-06 18:23:39.533 +03:30 [INF] Received HTTP response headers after 6082.5298ms - 200
+2024-09-06 18:23:39.537 +03:30 [INF] End processing HTTP request after 6108.6725ms - 200
+2024-09-06 18:23:39.828 +03:30 [INF] Executed action method Store.MVC.Controllers.BrandController.Index (Store.MVC), returned result Microsoft.AspNetCore.Mvc.ViewResult in 6413.0792ms.
+2024-09-06 18:23:39.842 +03:30 [INF] Executing ViewResult, running view Index.
+2024-09-06 18:23:39.907 +03:30 [INF] Executed ViewResult - view Index executed in 69.0124ms.
+2024-09-06 18:23:39.946 +03:30 [INF] Executed action Store.MVC.Controllers.BrandController.Index (Store.MVC) in 7111.0441ms
+2024-09-06 18:23:39.949 +03:30 [INF] Executed endpoint 'Store.MVC.Controllers.BrandController.Index (Store.MVC)'
+2024-09-06 18:23:39.953 +03:30 [INF] Request finished HTTP/1.1 GET http://localhost:5291/Brand - 200 null text/html; charset=utf-8 7254.6367ms
+2024-09-06 18:23:40.025 +03:30 [INF] Request starting HTTP/1.1 GET http://localhost:5291/_vs/browserLink - null null
+2024-09-06 18:23:40.140 +03:30 [INF] Request finished HTTP/1.1 GET http://localhost:5291/_vs/browserLink - 200 null text/javascript; charset=UTF-8 116.6503ms
+2024-09-06 18:23:40.233 +03:30 [INF] Request starting HTTP/1.1 GET http://localhost:5291/_framework/aspnetcore-browser-refresh.js - null null
+2024-09-06 18:23:40.242 +03:30 [INF] Request finished HTTP/1.1 GET http://localhost:5291/_framework/aspnetcore-browser-refresh.js - 200 13753 application/javascript; charset=utf-8 9.1155ms

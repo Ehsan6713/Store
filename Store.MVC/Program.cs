@@ -2,8 +2,26 @@ using Store.MVC.Contracts;
 using Store.MVC.Services.Base;
 using Store.MVC.Services;
 using System.Reflection;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+// Add services to the container.
+builder.Host.UseSerilog((ctx, lc) => lc.
+WriteTo.Console()
+ .WriteTo.File("log.txt")
+ .WriteTo.MSSqlServer(
+        connectionString: ctx.Configuration.GetConnectionString("LogStore"),
+        sinkOptions: new Serilog.Sinks.MSSqlServer.MSSqlServerSinkOptions
+        {
+            TableName = "Logs",
+            AutoCreateSqlTable = true,
+
+        })
+ );
+
+
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddHttpClient(); // Register HttpClient separately
 
