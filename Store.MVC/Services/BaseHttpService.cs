@@ -15,16 +15,16 @@ namespace Store.MVC.Services
             this.storage = storage;
             this.client = client;
         }
-        protected Response<Guid> ConvertApiException(ApiException exception)
+        protected Response<T> ConvertApiException<T>(ApiException exception)
         {
             switch(exception.StatusCode)
             {
                 case 400:
-                    return new Response<Guid>() { ValidationErrors = exception.Response, Message = "Validation Errors", Success = false };
+                    return new Response<T>() { ValidationErrors = exception.Response, Message = "Validation Errors", Success = false };
                 case 404:
-                    return new Response<Guid>() { Message = "Not Found ", Success = false };
+                    return new Response<T>() { Message = "Not Found ", Success = false };
                 default:
-                    return new Response<Guid>() { Message = "there is a error ", Success = false };
+                    return new Response<T>() { Message = "there is a error ", Success = false };
 
             }
         }

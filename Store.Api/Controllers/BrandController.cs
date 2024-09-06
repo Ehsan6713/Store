@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Store.Application.DTOS.Brand;
 using Store.Application.Features.Brands.Requests.Commands;
 using Store.Application.Features.Brands.Requests.Queries;
+using Store.Application.Features.Person.Handlers.Commands;
+using Store.Application.Resposes;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -30,13 +32,13 @@ namespace Store.Api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<BrandDto>> Get(int id)
         {
-            var brand = await mediator.Send(new GetBrandDetailRequest() {Id=id });
+            var brand = await mediator.Send(new GetBrandDetailRequest() { Id = id });
             return Ok(brand);
         }
 
         // POST api/<BrandController>
         [HttpPost]
-        public async Task<ActionResult<int>> Post([FromBody] CreateBrandDto createBrandDto)
+        public async Task<ActionResult<BaseResponse<int>>> Post([FromBody] CreateBrandDto createBrandDto)
         {
             var result = await mediator.Send(new CreateBrandDtoCommandRequest() { CreateBrandDto = createBrandDto });
             return Ok(result);
@@ -44,18 +46,18 @@ namespace Store.Api.Controllers
 
         // PUT api/<BrandController>/5
         [HttpPut("{id}")]
-        public async Task<ActionResult> Put(int id, [FromBody] UpdateBrandDto updateBrandDto)
+        public async Task<ActionResult<BaseResponse<Unit>>> Put(int id, [FromBody] UpdateBrandDto updateBrandDto)
         {
-            await mediator.Send(new UpdateBrandCommandRequest() { UpdateBrandDto = updateBrandDto });
-            return NoContent();
+            var response= await mediator.Send(new UpdateBrandCommandRequest() { UpdateBrandDto = updateBrandDto });
+            return Ok(response);
         }
 
         // DELETE api/<BrandController>/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult<BaseResponse<Unit>>> Delete(int id)
         {
-            await mediator.Send(new DeleteBrandCommandRequest() { Id = id });
-            return NoContent();
+            var response = await mediator.Send(new DeleteBrandCommandRequest() { Id = id });
+            return Ok(response);
         }
     }
 }

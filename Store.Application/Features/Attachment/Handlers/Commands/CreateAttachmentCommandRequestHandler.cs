@@ -10,10 +10,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Store.Application.Resposes;
 
 namespace Store.Application.Features.Attachment.Handlers.Commands
 {
-    public class CreateAttachmentCommandRequestHandler : IRequestHandler<CreateAttachmentCommandRequest, int>
+    public class CreateAttachmentCommandRequestHandler : IRequestHandler<CreateAttachmentCommandRequest, BaseResponse<int>>
     {
         private readonly IAttachmentRepository attachmentRepository;
         private readonly IMapper mapper;
@@ -23,17 +24,26 @@ namespace Store.Application.Features.Attachment.Handlers.Commands
             this.attachmentRepository = attachmentRepository;
             this.mapper = mapper;
         }
-        public async Task<int> Handle(CreateAttachmentCommandRequest request, CancellationToken cancellationToken)
+        public async Task<BaseResponse<int>> Handle(CreateAttachmentCommandRequest request, CancellationToken cancellationToken)
         {
+            var respons = new BaseResponse<int>();
             #region Validation
             var validator = new CreateAttachmentDtoValidator();
             var validationResult = validator.Validate(request.CreateAttachmentDto);
             if (validationResult.IsValid == false)
-                throw new ValidationException(validationResult);
+            {
+                respons.Success = false;
+                respons.Errors = validationResult.Errors.Select(x => x.ErrorMessage).ToList();
+                respons.Message = "Error Occer";
+            }
             #endregion
-            var attachment = mapper.Map<Domain.Attachment>(request.CreateAttachmentDto);
-            await attachmentRepository.Add(attachment);
-            return attachment.Id;
+            else
+            {
+                var attachment = mapper.Map<Domain.Attachment>(request.CreateAttachmentDto);
+                await attachmentRepository.Add(attachment);
+                respons.Data = attachment.Id;
+            }
+            return respons;
         }
     }
 }

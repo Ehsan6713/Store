@@ -9,10 +9,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Store.Application.Resposes;
 
 namespace Store.Application.Features.Attachment.Handlers.Commands
 {
-    public class DeleteAttachmentRequestHandler : IRequestHandler<DeleteAttachmentRequest>
+    public class DeleteAttachmentRequestHandler : IRequestHandler<DeleteAttachmentRequest, BaseResponse<Unit>>
     {
         private readonly IAttachmentRepository attachmentRepository;
         private readonly IMapper mapper;
@@ -22,14 +23,22 @@ namespace Store.Application.Features.Attachment.Handlers.Commands
             this.attachmentRepository = attachmentRepository;
             this.mapper = mapper;
         }
-        public async Task Handle(DeleteAttachmentRequest request, CancellationToken cancellationToken)
+        public async Task<BaseResponse<Unit>> Handle(DeleteAttachmentRequest request, CancellationToken cancellationToken)
         {
+            var respons = new BaseResponse<Unit>();
             var attachment = await attachmentRepository.Get(request.Id);
             if (attachment == null)
             {
-                throw new NotFoundException(nameof(Domain.Attachment), request.Id);
+                respons.Success = false;
+                respons.Errors.Add($"Not Found Id {request.Id}");
+                respons.Message = $"Not Found {request.Id}";
             }
-            await attachmentRepository.Delete(attachment);
+            else
+            {
+                await attachmentRepository.Delete(attachment);
+                respons.Data = Unit.Value;
+            }
+            return respons;
         }
     }
 }

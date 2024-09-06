@@ -1,17 +1,35 @@
-using Hanssens.Net;
 using Store.MVC.Contracts;
-using Store.MVC.Services;
 using Store.MVC.Services.Base;
+using Store.MVC.Services;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddHttpClient(); // Register HttpClient separately
+
+// Retrieve ApiUrl from configuration
+string apiUrl = builder.Configuration.GetValue<string>("ApiUrl");
+
+// Register Client with the required parameters
+builder.Services.AddScoped<IClient>(provider =>
+{
+    var httpClient = provider.GetRequiredService<System.Net.Http.HttpClient>();
+    return new Client(apiUrl, httpClient);
+});
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
-builder.Services.AddHttpClient<IClient, Client>(x => x.BaseAddress = new Uri(builder.Configuration.GetSection("ApiUrl").Value));
-// Add services to the container.
-builder.Services.AddControllersWithViews();
-
 builder.Services.AddSingleton<ILocalStorageService, LocalStorageService>();
+
+// Add other services
+builder.Services.AddScoped<IAttachmentServices, AttachmentServices>();
+builder.Services.AddScoped<IBrandServices, BrandServices>();
+builder.Services.AddScoped<ICategoryServices, CategoryServices>();
+builder.Services.AddScoped<IOrderDetailServices, OrderDetailServices>();
+builder.Services.AddScoped<IOrderServices, OrderServices>();
+builder.Services.AddScoped<IPersonServices, PersonServices>();
+builder.Services.AddScoped<IProductServices, ProductServices>();
+
+builder.Services.AddControllersWithViews();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -20,9 +38,8 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
 }
 app.UseStaticFiles();
-
+app.UseHttpsRedirection();
 app.UseRouting();
-
 app.UseAuthorization();
 
 app.MapControllerRoute(

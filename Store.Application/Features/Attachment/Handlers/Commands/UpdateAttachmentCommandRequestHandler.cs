@@ -10,10 +10,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Store.Application.Resposes;
 
 namespace Store.Application.Features.Attachment.Handlers.Commands
 {
-    public class UpdateAttachmentCommandRequestHandler : IRequestHandler<UpdateAttachmentCommandRequest, Unit>
+    public class UpdateAttachmentCommandRequestHandler : IRequestHandler<UpdateAttachmentCommandRequest, BaseResponse<Unit>>
     {
         private readonly IAttachmentRepository attachmentRepository;
         private readonly IMapper mapper;
@@ -23,19 +24,27 @@ namespace Store.Application.Features.Attachment.Handlers.Commands
             this.attachmentRepository = attachmentRepository;
             this.mapper = mapper;
         }
-        public async Task<Unit> Handle(UpdateAttachmentCommandRequest request, CancellationToken cancellationToken)
+        public async Task<BaseResponse<Unit>> Handle(UpdateAttachmentCommandRequest request, CancellationToken cancellationToken)
         {
+            var respons = new BaseResponse<Unit>();
             #region Validation
             var validator = new UpdateAttachmentDtoValidator();
             var validationResult = validator.Validate(request.UpdateAttachmentDto);
             if (validationResult.IsValid == false)
-                throw new ValidationException(validationResult);
+            {
+                respons.Success = false;
+                respons.Errors = validationResult.Errors.Select(x => x.ErrorMessage).ToList();
+                respons.Message = "Error Occer";
+            }
             #endregion
-
-            var attachment = await attachmentRepository.Get(request.UpdateAttachmentDto.Id);
-            mapper.Map(request.UpdateAttachmentDto, attachment);
-            await attachmentRepository.Update(attachment);
-            return Unit.Value;
+            else
+            {
+                var attachment = await attachmentRepository.Get(request.UpdateAttachmentDto.Id);
+                mapper.Map(request.UpdateAttachmentDto, attachment);
+                await attachmentRepository.Update(attachment);
+                respons.Data = Unit.Value;
+            }
+            return respons;
         }
     }
 }

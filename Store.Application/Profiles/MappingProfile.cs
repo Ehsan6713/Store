@@ -49,6 +49,9 @@ namespace Store.Application.Profiles
             CreateMap<OrderDetail, CreateOrderDetailDto>().ReverseMap();
             CreateMap<OrderDetail, OrderDetailDto>().ReverseMap();
             CreateMap<OrderDetail, UpdateOrderDetailDto>().ReverseMap();
+
+
+           
         }
     }
 }

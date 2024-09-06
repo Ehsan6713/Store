@@ -24,7 +24,7 @@ namespace Store.Api.Controllers
         public async Task<ActionResult<List<OrderDto>>> Get()
         {
             var response =await mediator.Send(new GetOrderListRequest());
-            return response;
+            return Ok(response);
         }
 
         // GET api/<Order>/5
@@ -32,7 +32,7 @@ namespace Store.Api.Controllers
         public async Task<ActionResult<BaseResponse<OrderDto>>> Get(int id)
         {
             var response = await mediator.Send(new GetOrderDetailsRequest() { Id=id});
-            return response;
+            return Ok(response);
         }
 
         // POST api/<Order>
@@ -40,7 +40,7 @@ namespace Store.Api.Controllers
         public async Task<ActionResult<BaseResponse<int>>> Post([FromBody] CreateOrderDto createOrderDto)
         {
             var response = await mediator.Send(new CreateOrderCommandRequest() { CreateOrderDto= createOrderDto });
-            return response;
+            return Ok(response);
         }
 
         // PUT api/<Order>/5
@@ -48,7 +48,7 @@ namespace Store.Api.Controllers
         public async Task<ActionResult<BaseResponse<Unit>>> Put(int id, [FromBody] UpdateOrderDto updateOrderDto)
         {
             var response = await mediator.Send(new UpdateOrderCommandRequest() {Id=id,UpdateOrderDto= updateOrderDto });
-            return response;
+            return Ok(response);
         }
 
         // DELETE api/<Order>/5
@@ -56,7 +56,7 @@ namespace Store.Api.Controllers
         public async Task<ActionResult<BaseResponse<Unit>>> Delete(int id)
         {
             var response = await mediator.Send(new DeleteOrderCommandRequest() { Id = id});
-            return response;
+            return Ok(response);
         }
     }
 }

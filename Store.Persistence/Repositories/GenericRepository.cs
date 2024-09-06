@@ -16,36 +16,36 @@ namespace Store.Persistence.Repositories
         {
             contex = storeDbContext;
         }
-        public async Task<T> Add(T entry)
+        public virtual async Task<T> Add(T entry)
         {
             await contex.AddAsync(entry);
             await contex.SaveChangesAsync();
             return entry;
         }
 
-        public async Task Delete(T entry)
+        public virtual async Task Delete(T entry)
         {
             contex.Set<T>().Remove(entry);
             await contex.SaveChangesAsync();
         }
 
-        public async Task<bool> Exist(int id)
+        public virtual async Task<bool> Exist(int id)
         {
             var entity = Get(id);
             return entity != null;
         }
 
-        public async Task<T> Get(int id)
+        public virtual async Task<T> Get(int id)
         {
             return await contex.Set<T>().FindAsync(id);
         }
 
-        public async Task<IReadOnlyList<T>> GetAll()
+        public virtual async Task<IReadOnlyList<T>> GetAll()
         {
             return await contex.Set<T>().ToListAsync();
         }
 
-        public async Task Update(T entry)
+        public virtual async Task Update(T entry)
         {
             contex.Entry(entry).State = EntityState.Modified;
             await contex.SaveChangesAsync();
