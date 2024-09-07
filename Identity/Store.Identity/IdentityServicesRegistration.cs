@@ -35,9 +35,11 @@ namespace Store.Identity
             {
                 option.UseSqlServer(configuration.GetConnectionString("IdentityConnectopnString"), x => x.MigrationsAssembly(Assembly.GetExecutingAssembly().ToString()));
             });
+            services.AddTransient<IAuthService, AuthService>();
+
+
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<IdentityDbContext>().AddDefaultTokenProviders();
 
-            services.AddTransient<IAuthService, AuthService>();
 
             services.AddAuthentication(option =>
             {
@@ -45,7 +47,7 @@ namespace Store.Identity
                 option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(o =>
             {
-                o.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+                o.TokenValidationParameters = new TokenValidationParameters()
                 {
                     ValidateIssuerSigningKey = true,
                     ValidateIssuer = true,

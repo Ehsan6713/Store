@@ -1,3 +1,4 @@
+using Microsoft.OpenApi.Models;
 using Store.Application;
 using Store.Identity;
 using Store.Infrastructure;
@@ -22,7 +23,8 @@ builder.Services.RegisterIdentityServices(builder.Configuration);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+//builder.Services.AddSwaggerGen();
+AddSwager(builder.Services);
 
 
 var app = builder.Build();
@@ -41,3 +43,40 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
+void AddSwager(IServiceCollection services)
+{
+    services.AddSwaggerGen(option =>
+    {
+        option.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme()
+        {
+            Description = @"Enter 'Bearer' [space] and then your token in the text input below. 
+                            Example: 'Bearer abcdef12345'.",
+            Name = "Autorization",
+            In = ParameterLocation.Header,
+            Type = SecuritySchemeType.ApiKey,
+            Scheme = "Bearer"
+        });
+
+        option.AddSecurityRequirement(new OpenApiSecurityRequirement()
+        {
+            {
+            new OpenApiSecurityScheme()
+            {
+                Reference=new OpenApiReference()
+                {
+                    Type=ReferenceType.SecurityScheme,
+                    Id="Bearer"
+                },
+                Scheme="oauth2",
+                Name="Bearer",
+                In=ParameterLocation.Header
+            },
+            new List<string>()
+        }
+        }
+        );
+
+    });
+}
