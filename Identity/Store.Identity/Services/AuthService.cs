@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -52,7 +53,7 @@ namespace Store.Identity.Services
         public async Task<RegisterationResponse> Register(RegisterationRequest request)
         {
             var userByEmail = await userManager.FindByEmailAsync(request.Email);
-            if (userByEmail == null)
+            if (userByEmail != null)
             {
                 throw new Exception($"{request.Email} is Exists");
             }
@@ -61,12 +62,13 @@ namespace Store.Identity.Services
                 UserName = request.Email,
                 Email = request.Email,
                 FirstName = request.FirstName,
-                LastName = request.LastName
+                LastName = request.LastName,
+                EmailConfirmed=true
             };
-            var response = userManager.CreateAsync(applicationUser);
-            if (response.IsCompletedSuccessfully)
+                var response =await userManager.CreateAsync(applicationUser,request.Password);
+            if (response.Succeeded)
             {
-                await userManager.AddToRoleAsync(applicationUser, "Empoyee");
+                await userManager.AddToRoleAsync(applicationUser, "EMPLOYEE");
                 return new RegisterationResponse() { UserId = applicationUser.Id };
             }
             throw new Exception($"Error In Registration Occer");
@@ -107,6 +109,22 @@ namespace Store.Identity.Services
             return jwtSecurityToken;
 
 
+        }
+        public class PasswordHasher
+        {
+            public static string HashPassword(string password)
+            {
+                using (SHA256 sha256Hash = SHA256.Create())
+                {
+                    byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(password));
+                    StringBuilder builder = new StringBuilder();
+                    for (int i = 0; i < bytes.Length; i++)
+                    {
+                        builder.Append(bytes[i].ToString("x2"));
+                    }
+                    return builder.ToString();
+                }
+            }
         }
     }
 }

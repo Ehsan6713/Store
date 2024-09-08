@@ -39,3 +39,41 @@
 2024-09-06 18:23:40.140 +03:30 [INF] Request finished HTTP/1.1 GET http://localhost:5291/_vs/browserLink - 200 null text/javascript; charset=UTF-8 116.6503ms
 2024-09-06 18:23:40.233 +03:30 [INF] Request starting HTTP/1.1 GET http://localhost:5291/_framework/aspnetcore-browser-refresh.js - null null
 2024-09-06 18:23:40.242 +03:30 [INF] Request finished HTTP/1.1 GET http://localhost:5291/_framework/aspnetcore-browser-refresh.js - 200 13753 application/javascript; charset=utf-8 9.1155ms
+2024-09-08 23:12:26.909 +03:30 [INF] User profile is available. Using 'C:\Users\HP\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-09-08 23:12:27.312 +03:30 [INF] Now listening on: http://localhost:5291
+2024-09-08 23:12:27.327 +03:30 [INF] Application started. Press Ctrl+C to shut down.
+2024-09-08 23:12:27.329 +03:30 [INF] Hosting environment: Development
+2024-09-08 23:12:27.337 +03:30 [INF] Content root path: D:\Git\Store\Store\Store.MVC
+2024-09-08 23:12:28.077 +03:30 [INF] Request starting HTTP/1.1 GET http://localhost:5291/ - null null
+2024-09-08 23:12:28.505 +03:30 [WRN] Failed to determine the https port for redirect.
+2024-09-08 23:12:28.562 +03:30 [INF] Executing endpoint 'Store.MVC.Controllers.HomeController.Index (Store.MVC)'
+2024-09-08 23:12:28.674 +03:30 [INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Store.MVC.Controllers.HomeController (Store.MVC).
+2024-09-08 23:12:28.958 +03:30 [INF] Executing action method Store.MVC.Controllers.HomeController.Index (Store.MVC) - Validation state: "Valid"
+2024-09-08 23:12:28.968 +03:30 [INF] Executed action method Store.MVC.Controllers.HomeController.Index (Store.MVC), returned result Microsoft.AspNetCore.Mvc.ViewResult in 0.7493ms.
+2024-09-08 23:12:28.990 +03:30 [INF] Executing ViewResult, running view Index.
+2024-09-08 23:12:29.277 +03:30 [INF] Executed ViewResult - view Index executed in 284.3552ms.
+2024-09-08 23:12:29.298 +03:30 [INF] Request starting HTTP/1.1 GET http://localhost:5291/Store.MVC.styles.css?v=m5sub4ezvQeYGsDIKECNIG2S0lNxwBnftDgj7urM0Hc - null null
+2024-09-08 23:12:29.312 +03:30 [INF] Request starting HTTP/1.1 GET http://localhost:5291/css/site.css?v=pAGv4ietcJNk_EwsQZ5BN9-K4MuNYS2a9wl4Jw-q9D0 - null null
+2024-09-08 23:12:29.313 +03:30 [INF] Request starting HTTP/1.1 GET http://localhost:5291/lib/bootstrap/dist/css/bootstrap.min.css - null null
+2024-09-08 23:12:29.316 +03:30 [INF] Executed action Store.MVC.Controllers.HomeController.Index (Store.MVC) in 637.4217ms
+2024-09-08 23:12:29.339 +03:30 [INF] The file /css/site.css was not modified
+2024-09-08 23:12:29.344 +03:30 [INF] Executed endpoint 'Store.MVC.Controllers.HomeController.Index (Store.MVC)'
+2024-09-08 23:12:29.343 +03:30 [INF] The file /lib/bootstrap/dist/css/bootstrap.min.css was not modified
+2024-09-08 23:12:29.348 +03:30 [INF] Request finished HTTP/1.1 GET http://localhost:5291/css/site.css?v=pAGv4ietcJNk_EwsQZ5BN9-K4MuNYS2a9wl4Jw-q9D0 - 304 null text/css 34.6181ms
+2024-09-08 23:12:29.358 +03:30 [INF] Request finished HTTP/1.1 GET http://localhost:5291/ - 200 null text/html; charset=utf-8 1298.9395ms
+2024-09-08 23:12:29.349 +03:30 [INF] Request finished HTTP/1.1 GET http://localhost:5291/lib/bootstrap/dist/css/bootstrap.min.css - 304 null text/css 36.0592ms
+2024-09-08 23:12:29.375 +03:30 [INF] Request starting HTTP/1.1 GET http://localhost:5291/lib/jquery/dist/jquery.min.js - null null
+2024-09-08 23:12:29.379 +03:30 [INF] Request starting HTTP/1.1 GET http://localhost:5291/_framework/aspnetcore-browser-refresh.js - null null
+2024-09-08 23:12:29.380 +03:30 [INF] Sending file. Request path: '/Store.MVC.styles.css'. Physical path: 'D:\Git\Store\Store\Store.MVC\obj\Debug\net8.0\scopedcss\bundle\Store.MVC.styles.css'
+2024-09-08 23:12:29.392 +03:30 [INF] Request starting HTTP/1.1 GET http://localhost:5291/js/site.js?v=hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo - null null
+2024-09-08 23:12:29.413 +03:30 [INF] The file /js/site.js was not modified
+2024-09-08 23:12:29.414 +03:30 [INF] Request finished HTTP/1.1 GET http://localhost:5291/js/site.js?v=hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo - 304 null text/javascript 22.2835ms
+2024-09-08 23:12:29.408 +03:30 [INF] Request finished HTTP/1.1 GET http://localhost:5291/_framework/aspnetcore-browser-refresh.js - 200 13753 application/javascript; charset=utf-8 29.1753ms
+2024-09-08 23:12:29.396 +03:30 [INF] The file /lib/jquery/dist/jquery.min.js was not modified
+2024-09-08 23:12:29.405 +03:30 [INF] Request finished HTTP/1.1 GET http://localhost:5291/Store.MVC.styles.css?v=m5sub4ezvQeYGsDIKECNIG2S0lNxwBnftDgj7urM0Hc - 200 1127 text/css 107.3768ms
+2024-09-08 23:12:29.427 +03:30 [INF] Request starting HTTP/1.1 GET http://localhost:5291/lib/bootstrap/dist/js/bootstrap.bundle.min.js - null null
+2024-09-08 23:12:29.433 +03:30 [INF] Request finished HTTP/1.1 GET http://localhost:5291/lib/jquery/dist/jquery.min.js - 304 null text/javascript 57.9593ms
+2024-09-08 23:12:29.461 +03:30 [INF] Request starting HTTP/1.1 GET http://localhost:5291/_vs/browserLink - null null
+2024-09-08 23:12:29.464 +03:30 [INF] The file /lib/bootstrap/dist/js/bootstrap.bundle.min.js was not modified
+2024-09-08 23:12:29.525 +03:30 [INF] Request finished HTTP/1.1 GET http://localhost:5291/lib/bootstrap/dist/js/bootstrap.bundle.min.js - 304 null text/javascript 97.2468ms
+2024-09-08 23:12:29.639 +03:30 [INF] Request finished HTTP/1.1 GET http://localhost:5291/_vs/browserLink - 200 null text/javascript; charset=UTF-8 178.137ms

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Store.Application.DTOS.Attachment;
 using Store.Application.DTOS.Order;
@@ -14,6 +15,7 @@ namespace Store.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class AttachmentController : ControllerBase
     {
         private readonly IMediator mediator;

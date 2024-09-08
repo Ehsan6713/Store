@@ -53,7 +53,7 @@ void AddSwager(IServiceCollection services)
         {
             Description = @"Enter 'Bearer' [space] and then your token in the text input below. 
                             Example: 'Bearer abcdef12345'.",
-            Name = "Autorization",
+            Name = "Authorization",
             In = ParameterLocation.Header,
             Type = SecuritySchemeType.ApiKey,
             Scheme = "Bearer"
@@ -77,6 +77,12 @@ void AddSwager(IServiceCollection services)
         }
         }
         );
+        option.SwaggerDoc("v1", new OpenApiInfo()
+        {
+            Version = "v1",
+            Title = "Store Api"
+        });
 
     });
+
 }

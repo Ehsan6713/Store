@@ -24,13 +24,7 @@ namespace Store.Identity
     {
         public static IServiceCollection RegisterIdentityServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.Configure<JWTSettings>(configuration.GetSection("JWTSettings").Value, x =>
-            {
-                x.Issuer = x.Issuer;
-                x.DurationInMinutes = x.DurationInMinutes;
-                x.Audience = x.Audience;
-                x.Key = x.Key;               
-            });
+            services.Configure<JWTSettings>(configuration.GetSection("JWTSettings"));
             services.AddDbContext<IdentityDbContext>(option =>
             {
                 option.UseSqlServer(configuration.GetConnectionString("IdentityConnectopnString"), x => x.MigrationsAssembly(Assembly.GetExecutingAssembly().ToString()));
