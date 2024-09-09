@@ -21,9 +21,28 @@ namespace Store.MVC.Contracts
             returnUrl = returnUrl ?? Url.Content("~/");
             var response = await authenticateService.Authenticate(model);
             if (response)
-               return LocalRedirect(returnUrl);
+                return LocalRedirect(returnUrl);
             ModelState.AddModelError("", "Error Faild");
             return View(model);
+        }
+
+        public IActionResult Register()
+        {
+            return View(new RegisterVM());
+        }
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterVM model)
+        {
+            var result=await authenticateService.Register(model);
+            if (result)
+                return LocalRedirect(Url.Content("~/"));
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await authenticateService.LogOut();
+            return LocalRedirect("/Users/Login");
         }
     }
 }

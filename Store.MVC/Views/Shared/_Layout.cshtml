@@ -22,27 +22,10 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item ">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>  
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Brand" asp-action="Index">Brand</a>
-                        </li> 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Category</a>
-                        </li> 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Attachment" asp-action="Index">Brand</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Person" asp-action="Index">Person</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Product</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="Index">Orders</a>
-                        </li>
+                       <partial name="_LogedInPartial" />
                     </ul>
                 </div>
             </div>

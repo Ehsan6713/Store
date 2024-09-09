@@ -6,7 +6,7 @@ namespace Store.MVC.Contracts
     public interface IAuthenticateService
     {
         Task<bool> Authenticate(LoginVM request);
-        Task<bool> Register(RegisterationRequest request);
+        Task<bool> Register(RegisterVM request);
         Task LogOut();
     }
 }

@@ -3,6 +3,7 @@ using Store.MVC.Services.Base;
 using Store.MVC.Services;
 using System.Reflection;
 using Serilog;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,7 +25,6 @@ WriteTo.Console()
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddHttpClient(); // Register HttpClient separately
-
 // Retrieve ApiUrl from configuration
 string apiUrl = builder.Configuration.GetValue<string>("ApiUrl");
 
@@ -34,10 +34,20 @@ builder.Services.AddScoped<IClient>(provider =>
     var httpClient = provider.GetRequiredService<System.Net.Http.HttpClient>();
     return new Client(apiUrl, httpClient);
 });
+builder.Services.Configure<CookiePolicyOptions>(options =>
+{
+    options.MinimumSameSitePolicy = SameSiteMode.None;
+});
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).
+                AddCookie(option =>
+                {
+                    option.LoginPath = "/Users/Login";
+                });
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddSingleton<ILocalStorageService, LocalStorageService>();
 
+builder.Services.AddTransient<IAuthenticateService, AuthenticateService>();
 // Add other services
 builder.Services.AddScoped<IAttachmentServices, AttachmentServices>();
 builder.Services.AddScoped<IBrandServices, BrandServices>();
@@ -58,6 +68,7 @@ if (!app.Environment.IsDevelopment())
 app.UseStaticFiles();
 app.UseHttpsRedirection();
 app.UseRouting();
+app.UseCookiePolicy();
 app.UseAuthorization();
 
 app.MapControllerRoute(

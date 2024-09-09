@@ -32,7 +32,7 @@ namespace Store.MVC.Services
                     UserName = loginmodel.Email
                 };
                 var response = await client.LoInAsync(request);
-                if (response == null && !string.IsNullOrEmpty(response.Token))
+                if (response != null && !string.IsNullOrEmpty(response.Token))
                 {
                     var tokenContent = jwtSecurityTokenHandler.ReadJwtToken(response.Token);
                     var claims = ParseClaims(tokenContent);
@@ -57,9 +57,16 @@ namespace Store.MVC.Services
             await httpContextAccessor.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         }
 
-        public async Task<bool> Register(RegisterationRequest request)
+        public async Task<bool> Register(RegisterVM request)
         {
-            var response = await client.RegisterAsync(request);
+            var resisterVm = new RegisterationRequest()
+            {
+                Email = request.Email,
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                Password = request.Password
+            };
+            var response = await client.RegisterAsync(resisterVm);
             if (!string.IsNullOrEmpty(response.UserId))
                 return true;
             return false;
