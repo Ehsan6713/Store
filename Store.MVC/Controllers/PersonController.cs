@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Store.MVC.Contracts;
 using Store.MVC.Models.PersonViewModels;
 
 namespace Store.MVC.Controllers
 {
+    [Authorize]
     public class PersonController : Controller
     {
         private readonly IPersonServices PersonServices;

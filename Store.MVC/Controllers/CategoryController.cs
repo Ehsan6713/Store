@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Store.MVC.Contracts;
 using Store.MVC.Models.CategoryViewModels;
 
 namespace Store.MVC.Controllers
 {
+    [Authorize]
     public class CategoryController : Controller
     {
         private readonly ICategoryServices CategoryServices;

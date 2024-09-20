@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -7,6 +8,7 @@ using Store.MVC.Models.Brands;
 
 namespace Store.MVC.Controllers
 {
+    [Authorize]
     public class BrandController : Controller
     {
         private readonly IBrandServices brandServices;

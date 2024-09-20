@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Store.MVC.Contracts;
 using Store.MVC.Models;
 
-namespace Store.MVC.Contracts
+namespace Store.MVC.Controllers
 {
     public class UsersController : Controller
     {
@@ -28,14 +29,16 @@ namespace Store.MVC.Contracts
 
         public IActionResult Register()
         {
-            return View(new RegisterVM());
+            return View();
         }
         [HttpPost]
         public async Task<IActionResult> Register(RegisterVM model)
         {
-            var result=await authenticateService.Register(model);
+            if (!ModelState.IsValid)
+                return View(model);
+            var result = await authenticateService.Register(model);
             if (result)
-                return LocalRedirect(Url.Content("~/"));
+                return LocalRedirect("/");
             return View(model);
         }
         [HttpPost]
